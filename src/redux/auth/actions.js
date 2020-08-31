@@ -10,7 +10,7 @@ export const authLogin = (user, navigation) => async (dispatch) => {
     if (status < 200 && status >= 300) throw new Error('Something went wrong');
     await AsyncStorage.setItem('token', data.token);
     dispatch({type: types.AUTH_LOGIN_SUCCESS, payload: data});
-    navigation.navigate('Newsfeed');
+    navigation.navigate('Home');
   } catch (error) {
     let message = error?.response?.data;
     console.log('error', error.response.data);
