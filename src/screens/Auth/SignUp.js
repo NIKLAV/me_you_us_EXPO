@@ -98,7 +98,11 @@ const SignUp = ({ navigation }) => {
         return false;
       }
       setPasswordError(
-        "Password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: Using minimum one Capital letter, Using minimum one small letter. Using minimum one Number, Using at least one Special symbols"
+  `Password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: 
+- Using minimum one Capital letter,
+- Using minimum one small letter. 
+- Using minimum one Number, 
+- Using at least one Special symbols`
       );
       return true;
     }
@@ -109,7 +113,11 @@ const SignUp = ({ navigation }) => {
       ) {
         if (email === password) {
           setPasswordError(
-            "Password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: Using minimum one Capital letter, Using minimum one small letter. Using minimum one Number, Using at least one Special symbols"
+            `Password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: 
+- Using minimum one Capital letter,
+- Using minimum one small letter. 
+- Using minimum one Number, 
+- Using at least one Special symbols`
           );
           return true;
         }
@@ -117,7 +125,11 @@ const SignUp = ({ navigation }) => {
         return false;
       }
       setConfirmPasswordError(
-        "Confirm password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: Using minimum one Capital letter, Using minimum one small letter. Using minimum one Number, Using at least one Special symbols"
+`Confirm password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: 
+- Using minimum one Capital letter,
+- Using minimum one small letter. 
+- Using minimum one Number, 
+- Using at least one Special symbols`
       );
       return true;
     }

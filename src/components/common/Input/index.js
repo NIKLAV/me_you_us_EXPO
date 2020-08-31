@@ -30,22 +30,22 @@ const Input = ({
   const shake = () => {
     Animated.timing(shakeAnim, {
       toValue: 20,
-      duration: 300,
+      duration: 200,
       useNativeDriver: false,
     }).start(() => {
       Animated.timing(shakeAnim, {
         toValue: 0,
-        duration: 300,
+        duration: 200,
         useNativeDriver: false,
       }).start(() => {
         Animated.timing(shakeAnim, {
           toValue: 20,
-          duration: 300,
+          duration: 200,
           useNativeDriver: false,
         }).start(() => {
           Animated.timing(shakeAnim, {
             toValue: 0,
-            duration: 300,
+            duration: 200,
             useNativeDriver: false,
           }).start();
         });
@@ -61,11 +61,11 @@ const Input = ({
       <Animated.View
         style={[
           styles.input__container,
-          errorMessage ? { marginLeft: shakeAnim } : null,
+          errorMessage ? { marginLeft: shakeAnim, borderColor: COLOR.ERROR_COLOR, borderBottomWidth: 0.7 } : null,
         ]}
       >
         <TextInput
-          placeholderTextColor={COLOR.PLACEHOLDER_TEXT_COLOR}
+          placeholderTextColor={errorMessage ? COLOR.ERROR_COLOR : COLOR.PLACEHOLDER_TEXT_COLOR}
           onBlur={onBlur}
           placeholder={placeholder}
           style={styles.input}
@@ -118,11 +118,8 @@ const styles = StyleSheet.create({
     width: containerWidth,
     borderBottomWidth: 0.3,
   },
-  inputN: {
-    width: width - 40 - 40,
-  },
   error: {
-    zIndex: 1000,
+    width: containerWidth - 20,
     flexDirection: "row",
     marginTop: 10,
   },
