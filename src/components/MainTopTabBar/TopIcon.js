@@ -1,14 +1,18 @@
 import React from "react";
 import HomeIcon from "react-native-vector-icons/FontAwesome";
 import SettingsIcon from "react-native-vector-icons/FontAwesome5";
+import AllFriendsIcon from "react-native-vector-icons/FontAwesome5";
+import NotificationIcon from "react-native-vector-icons/Fontisto";
+import WalletIcon from "react-native-vector-icons/Fontisto";
+import ChatIcon from "react-native-vector-icons/Ionicons";
 import { COLOR, TOP_ICON_SIZE } from "../../constants";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
-const TopIcon = ({ name }) => {
+const TopIcon = ({ isFocused, name }) => {
+  const color = isFocused ? COLOR.PRIMARY_COLOR : COLOR.TOP_ICONS_COLOR;
   const navigation = useNavigation();
-  console.warn(navigation)
   return (
     <>
       <TouchableWithoutFeedback
@@ -16,9 +20,17 @@ const TopIcon = ({ name }) => {
         style={styles.icon}
       >
         {name === "Home" ? (
-          <HomeIcon name="home" color={COLOR.TOP_ICONS_COLOR} size={25} />
-        ) : name === "GeneralSettings" ? (
-          <SettingsIcon name="user-edit" color={COLOR.TOP_ICONS_COLOR} size={20} />
+          <HomeIcon name="home" color={color} size={25} />
+        ) : name === "Settings" ? (
+          <SettingsIcon name="user-edit" color={color} size={20} />
+        ) : name === "AllFriends" ? (
+          <AllFriendsIcon name="user-alt" color={color} size={20} />
+        ) : name === "Notification" ? (
+          <NotificationIcon name="bell-alt" color={color} size={20} />
+        ) : name === "Wallet" ? (
+          <WalletIcon name="credit-card" color={color} size={18} />
+        ) : name === "Chat" ? (
+          <ChatIcon name="ios-chatbubbles" color={color} size={23} />
         ) : null}
       </TouchableWithoutFeedback>
     </>

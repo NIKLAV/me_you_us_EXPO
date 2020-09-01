@@ -1,8 +1,9 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React from "react";
+import { Text } from "react-native";
+import AccountSettings from "../../components/AccountSettings";
 
 const GeneralSettings = () => {
-  return <Text>GeneralSettings</Text>;
+  return <AccountSettings />;
 };
 
 export default GeneralSettings;

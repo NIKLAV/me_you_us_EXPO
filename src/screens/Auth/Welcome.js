@@ -1,45 +1,46 @@
-import React from 'react';
-import {Text, View, ImageBackground, StyleSheet, Image, StatusBar} from 'react-native';
-import {width, height, COLOR, FONT_SIZE} from '../../constants';
-import CustomButton from '../../components/common/Button';
+import React from "react";
+import {
+  Text,
+  View,
+  ImageBackground,
+  StyleSheet,
+  Image,
+  StatusBar,
+} from "react-native";
+import { width, height, COLOR, FONT_SIZE } from "../../constants";
+import CustomButton from "../../components/common/Button";
+import Logo from "../../components/common/Logo/Logo";
 
 const marginSlogan = 45;
 const marginLogo = 70;
 
-const Welcome = ({navigation}) => {
+const Welcome = ({ navigation }) => {
   const onPressSignUp = () => {
-    navigation.navigate('SignUp')
-  }
+    navigation.navigate("SignUp");
+  };
 
   const onPressLogin = () => {
-    navigation.navigate('Login')
-  }
+    navigation.navigate("Login");
+  };
   return (
     <>
-      <StatusBar hidden/>
+      <StatusBar hidden />
       <ImageBackground
         style={styles.background}
-        source={require('../../assets/img/home/back.png')}>
+        source={require("../../assets/img/home/back.png")}
+      >
         <View style={styles.container}>
-          <View style={styles.logo}>
-            <View>
-              <Image
-                style={{position: 'absolute'}}
-                source={require('../../assets/img/home/arrow_left.png')}
-              />
-              <Image source={require('../../assets/img/home/arrow_right.png')} />
-            </View>
-            <View>
-              <Text style={styles.logo__text}>MeYouUS</Text>
-            </View>
+          <View style={{ marginTop: marginLogo }}>
+            <Logo type="welcome" />
           </View>
-  
+
           <View
             style={{
-              justifyContent: 'space-between',
-              flexDirection: 'column',
+              justifyContent: "space-between",
+              flexDirection: "column",
               height: height - marginLogo - marginSlogan,
-            }}>
+            }}
+          >
             <View style={styles.slogan}>
               <Text style={styles.slogan__text}>
                 Snap photos and share like never before
@@ -51,13 +52,14 @@ const Welcome = ({navigation}) => {
                 eiusmod tempor incididunt ut labore
               </Text>
             </View>
-  
+
             <View
               style={{
                 marginBottom: 50,
-                justifyContent: 'space-between',
+                justifyContent: "space-between",
                 height: 110,
-              }}>
+              }}
+            >
               <View>
                 <CustomButton
                   styleText={styles.signUp__text}
@@ -83,16 +85,16 @@ const styles = StyleSheet.create({
     height: height,
   },
   container: {
-    alignSelf: 'center',
+    alignSelf: "center",
     width: width - 80,
     height: height,
   },
   logo: {
     width: 140,
     marginTop: marginLogo,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   logo__text: {
     color: COLOR.LOGO_TEXT_COLOR,
@@ -112,13 +114,13 @@ const styles = StyleSheet.create({
   description__text: {
     fontSize: 16,
     lineHeight: 38,
-    color: '#caa1d8',
+    color: "#caa1d8",
   },
   signUp: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   signUp__text: {
-    color: '#a241ed',
+    color: "#a241ed",
     fontSize: FONT_SIZE.AUTH_BUTTON_FONT_SIZE,
   },
 });
