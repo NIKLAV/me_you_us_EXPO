@@ -1,7 +1,7 @@
 import { Dimensions } from "react-native";
 
 export const { width, height } = Dimensions.get("window");
-export const containerWidth = width - 50;
+export const containerWidth = width - 50 ;
 export const TOP_ICON_SIZE = 40;
 
 export const COLOR = {
@@ -16,6 +16,7 @@ export const COLOR = {
   PRIMARY_COLOR: "#a241ed",
   LOGO_TABBAR_TEXT_COLOR: "#575d6b",
   PRIMARY_TEXT_COLOR: "#575d6b",
+  SUCCESS_COLOR: '#67ae58',
 };
 
 export const FONT_SIZE = {

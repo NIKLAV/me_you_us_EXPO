@@ -81,6 +81,11 @@ const Login = ({ navigation }) => {
     navigation.navigate("SignUp");
   };
 
+  const clearFields = () => {
+    setEmail("");
+    setPassword("");
+  };
+
   const onPressLogin = () => {
     if (!email) {
       setEmailError("The email field is required.");
@@ -92,7 +97,12 @@ const Login = ({ navigation }) => {
       setPasswordError("The password must be at least 8 characters.");
     } else if (emailError || passwordError) {
       return;
-    } else dispatch(authLogin({ email, password }, navigation));
+    } else {
+      dispatch(
+        authLogin({ email, password, remember: isRemember }, navigation)
+      );
+      clearFields();
+    }
   };
 
   return (

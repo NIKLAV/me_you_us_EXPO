@@ -5,20 +5,27 @@ import AllFriendsIcon from "react-native-vector-icons/FontAwesome5";
 import NotificationIcon from "react-native-vector-icons/Fontisto";
 import WalletIcon from "react-native-vector-icons/Fontisto";
 import ChatIcon from "react-native-vector-icons/Ionicons";
+import LogoutIcon from "react-native-vector-icons/FontAwesome";
 import { COLOR, TOP_ICON_SIZE } from "../../constants";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { logout } from "../../redux/auth/actions";
+import { useDispatch } from "react-redux";
 
 const TopIcon = ({ isFocused, name }) => {
+  const dispatch = useDispatch();
   const color = isFocused ? COLOR.PRIMARY_COLOR : COLOR.TOP_ICONS_COLOR;
   const navigation = useNavigation();
+  const onPress = () => {
+    if (name === "Logout") {
+      dispatch(logout());
+     navigation.navigate("Auth");
+    } else navigation.navigate(name);
+  };
   return (
     <>
-      <TouchableWithoutFeedback
-        onPress={() => navigation.navigate(name)}
-        style={styles.icon}
-      >
+      <TouchableWithoutFeedback onPress={onPress} style={styles.icon}>
         {name === "Home" ? (
           <HomeIcon name="home" color={color} size={25} />
         ) : name === "Settings" ? (
@@ -31,6 +38,8 @@ const TopIcon = ({ isFocused, name }) => {
           <WalletIcon name="credit-card" color={color} size={18} />
         ) : name === "Chat" ? (
           <ChatIcon name="ios-chatbubbles" color={color} size={23} />
+        ) : name === "Logout" ? (
+          <LogoutIcon name="power-off" color={color} size={23} />
         ) : null}
       </TouchableWithoutFeedback>
     </>

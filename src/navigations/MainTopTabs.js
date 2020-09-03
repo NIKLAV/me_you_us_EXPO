@@ -11,6 +11,7 @@ import MainTopTabBar from "../components/MainTopTabBar";
 
 import Advertisement from "../screens/Settings/Advertisiment";
 import Security from "../screens/Settings/Security";
+import AuthStack from "./AuthStack";
 
 const Tab = createMaterialTopTabNavigator();
 const SetingsStack = createStackNavigator();
@@ -40,10 +41,10 @@ const Settings = () => {
 const MainTopTabs = () => {
   return (
     <Tab.Navigator
-      swipeEnabled={true}
+      swipeEnabled={false}
       tabBar={(props) => <MainTopTabBar {...props} />}
     >
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen  name="Home" component={Home} />
       <Tab.Screen name="Wallet" component={Wallet} />
       <Tab.Screen name="AllFriends" component={AllFriends} />
       <Tab.Screen name="Notification" component={Notification} />

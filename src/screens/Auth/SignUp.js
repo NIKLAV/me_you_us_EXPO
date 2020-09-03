@@ -16,6 +16,7 @@ import AuthButtons from "../../components/AuthButtons";
 import { authSignUp } from "../../redux/auth/actions";
 import * as helpers from "../../services/helpers";
 import CustomCheckBox from "../../components/common/Checkbox";
+import ModalSignup from "../../components/common/Modal/SignUp";
 
 const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -98,7 +99,7 @@ const SignUp = ({ navigation }) => {
         return false;
       }
       setPasswordError(
-  `Password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: 
+        `Password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: 
 - Using minimum one Capital letter,
 - Using minimum one small letter. 
 - Using minimum one Number, 
@@ -125,7 +126,7 @@ const SignUp = ({ navigation }) => {
         return false;
       }
       setConfirmPasswordError(
-`Confirm password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: 
+        `Confirm password can not be smaller than 8 symbols and maximum of 25 symbols with the following requirements: 
 - Using minimum one Capital letter,
 - Using minimum one small letter. 
 - Using minimum one Number, 
@@ -173,8 +174,6 @@ const SignUp = ({ navigation }) => {
     <ScrollView
       style={{ backgroundColor: COLOR.BACK_AUTH_COLOR, marginTop: 10 }}
     >
-      <CustomStatusBar />
-
       <ScrollView>
         <View style={styles.container}>
           <AuthHeader
@@ -183,6 +182,8 @@ const SignUp = ({ navigation }) => {
             eiusmod tempor incididunt ut labore"
             type="Sign up for an account"
           />
+
+          <ModalSignup />
 
           <View style={{ paddingBottom: 25, paddingTop: 25 }}>
             <Input
@@ -293,21 +294,17 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     paddingTop: 25,
     justifyContent: "space-around",
-    /* marginTop: 40, */
     alignSelf: "center",
     width: containerWidth,
-    /* height: height - 100, */
   },
   forgot__container: {
     width: containerWidth,
     marginTop: 30,
     flexDirection: "row",
-    /* alignItems: 'center', */
     justifyContent: "space-between",
   },
   remember__chechbox: {
     flexDirection: "row",
-    /* alignItems: 'center', */
     width: width / 3 + 30,
     justifyContent: "space-between",
   },

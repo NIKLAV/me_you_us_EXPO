@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { navigation } from '../navigations';
 
 export const interceptorAxios = () => {
-  console.log('intercept')
+  console.warn('intercept')
   /* axios.interceptors.request.use(
     config => {
       const newConfig = config;
@@ -22,9 +22,8 @@ export const interceptorAxios = () => {
     async response => {
       if (response.config.url === '/api/login') {
         const token = response?.data?.token;
-        console.log('token', token)
-        /* await AsyncStorage.setItem('token', token); */
-        navigation.navigate('Welcome')
+        console.warn('token in int', token)
+        await AsyncStorage.setItem('token', token);
         if (token) {
           axios.defaults.headers.common.Authorization = `Bearer ${token}`;
           /* history.replace(routes.newsfeed) */

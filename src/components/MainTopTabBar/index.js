@@ -29,6 +29,7 @@ const MainTopTabBar = ({state}) => {
               />
             );
           })}
+          <TopIcon name='Logout'/>
         </View>
       </View>
     </SafeAreaView>

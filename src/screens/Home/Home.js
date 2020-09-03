@@ -1,8 +1,14 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React from "react";
+import { Text } from "react-native";
+import CustomStatusBar from "../../components/common/StatusBar";
 
 const Home = () => {
-  return <Text>Home</Text>;
+  return (
+    <>
+    <CustomStatusBar/>
+      <Text>Home</Text>
+    </>
+  );
 };
 
 export default Home;
