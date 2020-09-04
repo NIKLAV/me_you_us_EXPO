@@ -43,6 +43,8 @@ const MainTopTabs = () => {
     <Tab.Navigator
       swipeEnabled={false}
       tabBar={(props) => <MainTopTabBar {...props} />}
+      lazy
+      
     >
       <Tab.Screen  name="Home" component={Home} />
       <Tab.Screen name="Wallet" component={Wallet} />

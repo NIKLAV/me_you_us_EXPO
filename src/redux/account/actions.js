@@ -7,7 +7,7 @@ export const getUserData = () => async (dispatch) => {
     const { data, status } = await API.account.getAccount();
     console.warn("data", data);
     if (status < 200 && status >= 300) throw new Error("Something went wrong");
-    dispatch({ type: types.SUCCESS_LOADING_ACCOUNT_DATA, payload: data });
+    dispatch({ type: types.SUCCESS_LOADING_ACCOUNT_DATA, payload: data[0] });
   } catch (error) {
     console.warn(error.response.data);
     let message = error?.response?.data;

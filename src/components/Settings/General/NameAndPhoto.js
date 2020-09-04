@@ -1,15 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import RoundPhoto from "../../common/RoundPhoto";
+import TextWrapper from "../../common/TextWrapper";
 
 const NameAndPhoto = ({ url, name, lastName }) => {
   return (
     <View style={styles.container}>
       <RoundPhoto url={url} />
       <View>
-        <Text>
+        <TextWrapper>
           {name} {lastName}
-        </Text>
+        </TextWrapper>
       </View>
     </View>
   );

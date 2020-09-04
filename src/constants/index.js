@@ -17,6 +17,7 @@ export const COLOR = {
   LOGO_TABBAR_TEXT_COLOR: "#575d6b",
   PRIMARY_TEXT_COLOR: "#575d6b",
   SUCCESS_COLOR: '#67ae58',
+  SETTINGS_INPUT_COLOR: '#ededed'
 };
 
 export const FONT_SIZE = {
