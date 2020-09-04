@@ -3,7 +3,6 @@ import { View, StyleSheet, Text } from "react-native";
 import { useNavigationState, useNavigation } from "@react-navigation/native";
 import TextWrapper from "../common/TextWrapper";
 import { containerWidth } from "../../constants";
-import CustomButton from "../../components/common/Button";
 import Tab from "./Tab";
 
 const AccountSettings = () => {

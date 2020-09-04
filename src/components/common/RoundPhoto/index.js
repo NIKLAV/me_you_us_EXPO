@@ -13,7 +13,11 @@ const RoundPhoto = ({ url, size = 60 }) => {
     <View>
       <Image
         style={[styles.image, { width: size, height: size }]}
-        source={checkUrl() ? { uri: `http://77.120.241.80:8871/storage/${url}` } : {uri: url}}
+        source={
+          checkUrl()
+            ? { uri: `http://77.120.241.80:8871/storage/${url}` }
+            : { uri: url }
+        }
       />
     </View>
   );

@@ -8,30 +8,33 @@ import TextWrapper from "../../common/TextWrapper";
 
 const PhotoPicker = ({ label, onPick }) => {
   const [img, setImg] = useState(null);
-  
+
   let openImage = async () => {
-      let premission = await ImagePicker.requestCameraRollPermissionsAsync();
+    let premission = await ImagePicker.requestCameraRollPermissionsAsync();
 
-      if(premission.granted === false) {
-          return
-      }
+    if (premission.granted === false) {
+      return;
+    }
 
-      let picker = await ImagePicker.launchImageLibraryAsync()
+    let picker = await ImagePicker.launchImageLibraryAsync();
 
-      if(picker.cancelled === true) {
-          return
-      }
+    if (picker.cancelled === true) {
+      return;
+    }
 
-      setImg({localUri: picker.uri})
-      onPick(picker.uri)
-      console.warn(picker)
-  }
-
+    setImg({ localUri: picker.uri });
+    onPick(picker.uri);
+    console.warn(picker);
+  };
 
   return (
     <>
       <TextWrapper style={styles.label}>{label}</TextWrapper>
-      <TouchableOpacity onPress={openImage} activeOpacity={0.8} style={styles.container}>
+      <TouchableOpacity
+        onPress={openImage}
+        activeOpacity={0.8}
+        style={styles.container}
+      >
         <View style={styles.picker}>
           <PlusIcon name="plus" color="#fff" size={18} />
         </View>
