@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { exp } from "react-native-reanimated";
 import PlusIcon from "react-native-vector-icons/FontAwesome";
 import TextWrapper from "../../common/TextWrapper";
 
 const PhotoPicker = ({ label, onPick }) => {
-  const [img, setImg] = useState(null);
-
   let openImage = async () => {
     let premission = await ImagePicker.requestCameraRollPermissionsAsync();
 
@@ -16,29 +13,30 @@ const PhotoPicker = ({ label, onPick }) => {
       return;
     }
 
-    let picker = await ImagePicker.launchImageLibraryAsync();
+    let picker = await ImagePicker.launchImageLibraryAsync({
+      base64: true,
+    });
 
     if (picker.cancelled === true) {
       return;
     }
 
-    setImg({ localUri: picker.uri });
-    onPick(picker.uri);
+    onPick(picker.uri, picker.base64);
     console.warn(picker);
   };
 
   return (
     <>
       <TextWrapper style={styles.label}>{label}</TextWrapper>
-      <TouchableOpacity
-        onPress={openImage}
-        activeOpacity={0.8}
-        style={styles.container}
-      >
-        <View style={styles.picker}>
+      <View style={styles.container}>
+        <TouchableOpacity
+          onPress={openImage}
+          activeOpacity={0.8}
+          style={styles.picker}
+        >
           <PlusIcon name="plus" color="#fff" size={18} />
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };

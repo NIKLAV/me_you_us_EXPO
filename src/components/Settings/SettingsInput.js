@@ -1,10 +1,37 @@
-import React from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+  Animated,
+  
+} from "react-native";
 import CalendarIcon from "react-native-vector-icons/FontAwesome";
 import { COLOR, containerWidth } from "../../constants";
 import TextWrapper from "../common/TextWrapper";
+import { shake } from "../../services/helpers";
+import ErrorMessage from "../common/Input/ErrorMessage";
 
-const SettingsInput = ({ label, placeholder, value, setValue, date, setShow }) => {
+const SettingsInput = ({
+  label,
+  placeholder,
+  value,
+  setValue,
+  date,
+  setShow,
+  errorMessage,
+  onBlur,
+  clearError
+}) => {
+  const [shakeAnim] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    shake(Animated, shakeAnim);
+  }, [errorMessage]);
+
   return (
     <>
       {date ? (
@@ -12,13 +39,20 @@ const SettingsInput = ({ label, placeholder, value, setValue, date, setShow }) =
           <TextWrapper style={styles.label}>{label}</TextWrapper>
           <View style={styles.dateInput}>
             <TextInput
-              onChangeText={setValue}
-              value={value}
+              value={`${value.getDate()}/${
+                value.getMonth() + 1
+              }/${value.getFullYear()}`}
               placeholderTextColor={COLOR.PLACEHOLDER_TEXT_COLOR}
               placeholder={placeholder}
-              style={{ paddingLeft: 15}}
+              style={{ paddingLeft: 15 }}
+              editable={false}
+              
             />
-            <TouchableOpacity onPress={setShow} style={{paddingRight: 15}} activeOpacity={0.8}>
+            <TouchableOpacity
+              onPress={setShow}
+              style={{ paddingRight: 15 }}
+              activeOpacity={0.8}
+            >
               <CalendarIcon
                 name="calendar"
                 size={20}
@@ -30,15 +64,18 @@ const SettingsInput = ({ label, placeholder, value, setValue, date, setShow }) =
       ) : (
         <View>
           <TextWrapper style={styles.label}>{label}</TextWrapper>
-          <View style={styles.input}>
+          <Animated.View style={[styles.input,  errorMessage && { marginLeft: shakeAnim, borderColor: COLOR.ERROR_COLOR, borderWidth: 1 }]}>
             <TextInput
               onChangeText={setValue}
               value={value}
               placeholderTextColor={COLOR.PLACEHOLDER_TEXT_COLOR}
               placeholder={placeholder}
               style={{ paddingLeft: 15 }}
+              onBlur={onBlur}
+             
             />
-          </View>
+          </Animated.View>
+          {errorMessage ? <ErrorMessage closeErrors={clearError} errorMessage={errorMessage} /> : null}
         </View>
       )}
     </>
@@ -54,7 +91,7 @@ const styles = StyleSheet.create({
     height: 42,
     marginVertical: 10,
     justifyContent: "center",
-    backgroundColor: COLOR.SETTINGS_INPUT_COLOR,
+    backgroundColor: COLOR.INPUT_COLOR,
     borderRadius: 20,
   },
   dateInput: {
@@ -63,7 +100,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     backgroundColor: COLOR.SETTINGS_INPUT_COLOR,
     borderRadius: 20,
   },

@@ -1,5 +1,5 @@
 export const empty = (arr) => {
-  return arr.find((i) => i === '') === '';
+  return arr.find((i) => i === "") === "";
 };
 export const passwordValid = (password) => {
   if (password.length <= 6) return false;
@@ -18,10 +18,45 @@ export const emailValid = (email) => {
   return true;
 };
 
-/* export const navigation = {
-  navigate,
-  dispatch,
-  replace,
-  push,
-  goBack,
-}; */
+export const phoneValid = (phone) => {
+  const regExp = /^[\+][1-9]{1}[\d]{9,13}$/;
+
+  if (!regExp.test(phone)) return false;
+
+  return true;
+};
+
+export const shake = (Animated, shakeAnim) => {
+  Animated.timing(shakeAnim, {
+    toValue: 20,
+    duration: 200,
+    useNativeDriver: false,
+  }).start(() => {
+    Animated.timing(shakeAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: false,
+    }).start(() => {
+      Animated.timing(shakeAnim, {
+        toValue: 20,
+        duration: 200,
+        useNativeDriver: false,
+      }).start(() => {
+        Animated.timing(shakeAnim, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: false,
+        }).start();
+      });
+    });
+  });
+};
+
+
+export const toBase64 = file =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });

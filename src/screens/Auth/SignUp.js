@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, ScrollView, Platform } from "react-native";
 import CheckBox from "@react-native-community/checkbox";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,9 +20,11 @@ import ModalSignup from "../../components/common/Modal/SignUp";
 
 const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
-  const errors = useSelector((state) => state.auth.errorSignUo);
+  const isSuccess = useSelector((state) => state.auth.isSuccess);
+  const identicalEmailError = useSelector((state) => state.auth.errorSignUp);
+  console.log('error in signup', identicalEmailError)
   const [isRemember, setIsRemember] = useState(false);
-  console.log(isRemember);
+
   const [firstName, setFirstName] = useState("");
   const [firstNameError, setFirstNameError] = useState(null);
 
@@ -170,6 +172,11 @@ const SignUp = ({ navigation }) => {
     clearFields();
   };
 
+  useEffect(() => {
+    if (identicalEmailError.length === 0) return;
+    setEmailError(identicalEmailError) 
+  }, [identicalEmailError])
+
   return (
     <ScrollView
       style={{ backgroundColor: COLOR.BACK_AUTH_COLOR, marginTop: 10 }}
@@ -183,7 +190,7 @@ const SignUp = ({ navigation }) => {
             type="Sign up for an account"
           />
 
-          <ModalSignup />
+          <ModalSignup visible={isSuccess} />
 
           <View style={{ paddingBottom: 25, paddingTop: 25 }}>
             <Input

@@ -14,9 +14,10 @@ const RoundPhoto = ({ url, size = 60 }) => {
       <Image
         style={[styles.image, { width: size, height: size }]}
         source={
-          checkUrl()
+          /* checkUrl()
             ? { uri: `http://77.120.241.80:8871/storage/${url}` }
-            : { uri: url }
+            : { uri: url } */
+            {uri: url}
         }
       />
     </View>
@@ -25,7 +26,7 @@ const RoundPhoto = ({ url, size = 60 }) => {
 
 const styles = StyleSheet.create({
   image: {
-    borderRadius: 40,
+    borderRadius: 100,
   },
 });
 

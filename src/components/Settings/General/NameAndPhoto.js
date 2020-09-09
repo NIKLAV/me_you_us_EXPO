@@ -18,7 +18,7 @@ const NameAndPhoto = ({ url, name, lastName, size }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "60%",
+    width: "100%",
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row'

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Button, Platform, Modal } from "react-native";
+import { View, Button, Platform, Modal, Text } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-export const DatePicker = ({ show, setShow }) => {
-  const [date, setDate] = useState(new Date(1598051730000));
-    console.warn(date)
+export const DatePicker = ({ setDate, date, setShow }) => {
+  /* const [date, setDate] = useState(new Date(1598051730000)); */
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
@@ -29,7 +29,9 @@ export const DatePicker = ({ show, setShow }) => {
         is24Hour={true}
         display="default"
         onChange={onChange}
+        maximumDate={new Date()}
       />
+     
     </View>
   );
 };

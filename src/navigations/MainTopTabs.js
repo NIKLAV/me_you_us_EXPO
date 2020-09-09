@@ -44,7 +44,7 @@ const MainTopTabs = () => {
       swipeEnabled={false}
       tabBar={(props) => <MainTopTabBar {...props} />}
       lazy
-      
+      /* removeClippedSubviews */
     >
       <Tab.Screen  name="Home" component={Home} />
       <Tab.Screen name="Wallet" component={Wallet} />

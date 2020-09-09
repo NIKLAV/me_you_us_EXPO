@@ -47,15 +47,16 @@ export const authLogin = (user, navigation) => async (dispatch) => {
 };
 
 export const authSignUp = (body) => async (dispatch) => {
+  dispatch({type: types.AUTH_SIGNUP_START})
   try {
     const { data, status } = await API.auth.signUp(body);
     console.log("data", data);
     if (status < 200 && status >= 300) throw new Error("Something went wrong");
     dispatch({ type: types.AUTH_SIGNUP_SUCCESS, payload: data });
   } catch (error) {
-    console.log(error.response.data);
-    let message = error?.response?.data;
-    dispatch({ type: types.AUTH_SIGNUP_FAILURE, payload: message });
+    /* console.log(error.response.data); */
+    let emailMessage = error?.response?.data?.email.toString();
+    dispatch({ type: types.AUTH_SIGNUP_FAILURE, payload: emailMessage });
   }
 };
 

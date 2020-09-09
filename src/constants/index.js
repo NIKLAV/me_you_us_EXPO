@@ -17,7 +17,7 @@ export const COLOR = {
   LOGO_TABBAR_TEXT_COLOR: "#575d6b",
   PRIMARY_TEXT_COLOR: "#575d6b",
   SUCCESS_COLOR: '#67ae58',
-  SETTINGS_INPUT_COLOR: '#ededed'
+  INPUT_COLOR: '#ededed'
 };
 
 export const FONT_SIZE = {
@@ -25,3 +25,7 @@ export const FONT_SIZE = {
   H1: 22,
   H3: 15,
 };
+
+export const MARGIN = {
+  DEFAULT_MARGIN_VERTICAL: 10,
+}

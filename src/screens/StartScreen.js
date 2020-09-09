@@ -7,8 +7,10 @@ import { COLOR } from "../constants";
 import axios from "axios";
 
 const StartScreen = ({ navigation }) => {
+  
   const dispatch = useDispatch();
   useEffect(() => {
+    console.warn('effect')
     const tryLogin = async () => {
       const userData = await AsyncStorage.getItem("userData");
       if (!userData) {
@@ -18,7 +20,7 @@ const StartScreen = ({ navigation }) => {
       const transformedData = JSON.parse(userData);
       const { token, time } = transformedData;
       const expirationDate = new Date(time);
-      console.warn(expirationDate, new Date());
+     
       if (expirationDate <= new Date() || !token) {
         delete axios.defaults.headers.common.Authorization;
         navigation.navigate("Auth");

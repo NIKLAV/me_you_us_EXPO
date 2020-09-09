@@ -7,9 +7,13 @@ import {
   Text,
   Animated,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import ErrorIcon from "react-native-vector-icons/Entypo";
 import { COLOR, width, height, containerWidth } from "../../../constants";
+import * as types from "../../../redux/types";
+import { shake } from "../../../services/helpers";
+import ErrorMessage from "./ErrorMessage";
 
 const Input = ({
   placeholder,
@@ -21,39 +25,21 @@ const Input = ({
   onBlur,
   onChange,
 }) => {
+  const dispatch = useDispatch();
   const [isHiddenPassword, setIsHiddenPassword] = useState(true);
   const onPressIcon = () => {
     setIsHiddenPassword(!isHiddenPassword);
   };
 
-  const [shakeAnim] = useState(new Animated.Value(0));
-  const shake = () => {
-    Animated.timing(shakeAnim, {
-      toValue: 20,
-      duration: 200,
-      useNativeDriver: false,
-    }).start(() => {
-      Animated.timing(shakeAnim, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: false,
-      }).start(() => {
-        Animated.timing(shakeAnim, {
-          toValue: 20,
-          duration: 200,
-          useNativeDriver: false,
-        }).start(() => {
-          Animated.timing(shakeAnim, {
-            toValue: 0,
-            duration: 200,
-            useNativeDriver: false,
-          }).start();
-        });
-      });
-    });
+  const closeErrors = () => {
+    clearError();
+    dispatch({ type: types.AUTH_SIGNUP_CLEAR_ERROR });
   };
+
+  const [shakeAnim] = useState(new Animated.Value(0));
+
   useEffect(() => {
-    shake();
+    shake(Animated, shakeAnim);
   }, [errorMessage]);
 
   return (
@@ -61,11 +47,19 @@ const Input = ({
       <Animated.View
         style={[
           styles.input__container,
-          errorMessage ? { marginLeft: shakeAnim, borderColor: COLOR.ERROR_COLOR, borderBottomWidth: 0.7 } : null,
+          errorMessage
+            ? {
+                marginLeft: shakeAnim,
+                borderColor: COLOR.ERROR_COLOR,
+                borderBottomWidth: 0.7,
+              }
+            : null,
         ]}
       >
         <TextInput
-          placeholderTextColor={errorMessage ? COLOR.ERROR_COLOR : COLOR.PLACEHOLDER_TEXT_COLOR}
+          placeholderTextColor={
+            errorMessage ? COLOR.ERROR_COLOR : COLOR.PLACEHOLDER_TEXT_COLOR
+          }
           onBlur={onBlur}
           placeholder={placeholder}
           style={styles.input}
@@ -92,19 +86,9 @@ const Input = ({
           </TouchableOpacity>
         ) : null}
       </Animated.View>
-      {errorMessage ? (
-        <View style={styles.error}>
-          <TouchableOpacity onPress={clearError}>
-            <ErrorIcon
-              name="circle-with-cross"
-              size={18}
-              style={{ marginRight: 15 }}
-              color={COLOR.ERROR_COLOR}
-            />
-          </TouchableOpacity>
-          <Text style={styles.error__text}>{errorMessage}</Text>
-        </View>
-      ) : null}
+      {errorMessage && (
+        <ErrorMessage closeErrors={closeErrors} errorMessage={errorMessage} />
+      )}
     </>
   );
 };

@@ -7,16 +7,20 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import CloseIcon from "react-native-vector-icons/Fontisto";
 import { COLOR, height, width } from "../../../../constants";
+import * as types from '../../../../redux/types'
 
-const ModalSignup = () => {
-  const [isOpen, setIsOpen] = useState(false);
+
+
+const ModalSignup = ({visible}) => {
+  const dispatch = useDispatch()
   const toogleModal = () => {
-    setIsOpen(!isOpen);
+    dispatch({type: types.AUTH_SIGNUP_CLOSE_MODAL})
   };
   return (
-    <Modal transparent={true} visible={isOpen} animationType={"slide"}>
+    <Modal transparent={true} visible={visible} animationType={"slide"}>
       <View style={styles.container}>
         <TouchableOpacity onPress={toogleModal} style={styles.icon}>
           <CloseIcon name="close-a" color="#fff" size={20} />
@@ -25,7 +29,7 @@ const ModalSignup = () => {
           <Image source={require("../../../../assets/img/modal/ok.png")} />
         </View>
         <View>
-          <Text style={styles.text}>Registration completed successfully</Text>
+          <Text style={styles.text}>Check your email</Text>
         </View>
       </View>
     </Modal>
