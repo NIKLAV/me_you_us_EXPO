@@ -3,6 +3,8 @@ import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 import CameraIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import RoundPhoto from "../../common/RoundPhoto";
 import { COLOR, width } from "../../../constants";
+import MessageInput from "../../common/MessageInput";
+import IconWrapper from "../../common/IconWrapper";
 
 const AddingPostField = () => {
   return (
@@ -12,42 +14,27 @@ const AddingPostField = () => {
           url={
             "https://vignette.wikia.nocookie.net/zlodei/images/9/98/Ph28.jpeg/revision/latest/top-crop/width/360/height/450?cb=20140629112400&path-prefix=ru"
           }
-          size={50}
+          size={42}
         />
       </View>
-      <View style={styles.input}>
-        <TextInput />
-      </View>
-      <TouchableOpacity activeOpacity={0.7} style={styles.camera}>
-        <CameraIcon size={25} name="camera-plus" color="#fff" />
-      </TouchableOpacity>
+      <MessageInput placeholder='What’s new?'/>
+      <IconWrapper activeOpacity={0.7}  style={{backgroundColor: "#7dcfff"}}>
+        <CameraIcon size={22} name="camera-plus" color="#fff" />
+      </IconWrapper>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    height: 80,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+    paddingHorizontal: 5,
     backgroundColor: COLOR.BACK_MAIN_TOP_TABBAR_COLOR,
   },
-  camera: {
-    height: 50,
-    width: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 50,
-    backgroundColor: "#7dcfff",
-  },
-  input: {
-      width: width - 150,
-      height: 42,
-      backgroundColor: COLOR.INPUT_COLOR,
-      borderRadius: 25,
-      borderWidth: 1,
-      borderColor: COLOR.INPUT_COLOR,
-  }
+  
 });
 
 export default AddingPostField;

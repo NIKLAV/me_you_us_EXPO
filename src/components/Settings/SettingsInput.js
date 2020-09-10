@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Platform,
   Animated,
-  
 } from "react-native";
 import CalendarIcon from "react-native-vector-icons/FontAwesome";
 import { COLOR, containerWidth } from "../../constants";
@@ -24,7 +23,7 @@ const SettingsInput = ({
   setShow,
   errorMessage,
   onBlur,
-  clearError
+  clearError,
 }) => {
   const [shakeAnim] = useState(new Animated.Value(0));
 
@@ -46,7 +45,6 @@ const SettingsInput = ({
               placeholder={placeholder}
               style={{ paddingLeft: 15 }}
               editable={false}
-              
             />
             <TouchableOpacity
               onPress={setShow}
@@ -64,7 +62,16 @@ const SettingsInput = ({
       ) : (
         <View>
           <TextWrapper style={styles.label}>{label}</TextWrapper>
-          <Animated.View style={[styles.input,  errorMessage && { marginLeft: shakeAnim, borderColor: COLOR.ERROR_COLOR, borderWidth: 1 }]}>
+          <Animated.View
+            style={[
+              styles.input,
+              errorMessage && {
+                marginLeft: shakeAnim,
+                borderColor: COLOR.ERROR_COLOR,
+                borderWidth: 1,
+              },
+            ]}
+          >
             <TextInput
               onChangeText={setValue}
               value={value}
@@ -72,10 +79,14 @@ const SettingsInput = ({
               placeholder={placeholder}
               style={{ paddingLeft: 15 }}
               onBlur={onBlur}
-             
             />
           </Animated.View>
-          {errorMessage ? <ErrorMessage closeErrors={clearError} errorMessage={errorMessage} /> : null}
+          {errorMessage ? (
+            <ErrorMessage
+              closeErrors={clearError}
+              errorMessage={errorMessage}
+            />
+          ) : null}
         </View>
       )}
     </>
@@ -101,7 +112,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: COLOR.SETTINGS_INPUT_COLOR,
+    backgroundColor: COLOR.INPUT_COLOR,
     borderRadius: 20,
   },
 });

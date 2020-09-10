@@ -1,3 +1,6 @@
+import * as React from "react";
+import { StackActions } from "@react-navigation/native";
+
 export const empty = (arr) => {
   return arr.find((i) => i === "") === "";
 };
@@ -52,11 +55,35 @@ export const shake = (Animated, shakeAnim) => {
   });
 };
 
-
-export const toBase64 = file =>
+export const toBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
+
+export const navigationRef = React.createRef();
+// export const navigation = navigationRef.current
+export function navigate(name, params) {
+  navigationRef.current?.navigate(name, params);
+}
+export function dispatch(action) {
+  navigationRef.current?.dispatch(action);
+}
+export function replace(name, params) {
+  navigationRef.current?.dispatch(StackActions.replace(name, params));
+}
+export function push(name, params) {
+  navigationRef.current?.dispatch(StackActions.push(name, params));
+}
+export function goBack() {
+  navigationRef.current?.goBack();
+}
+export const navigation = {
+  navigate,
+  dispatch,
+  replace,
+  push,
+  goBack,
+};

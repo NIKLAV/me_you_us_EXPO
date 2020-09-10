@@ -20,7 +20,7 @@ const TopIcon = ({ isFocused, name }) => {
   const onPress = () => {
     if (name === "Logout") {
       dispatch(logout());
-     navigation.navigate("Auth");
+      navigation.navigate("Auth");
     } else navigation.navigate(name);
   };
   return (

@@ -3,9 +3,9 @@ import { View, Text, StyleSheet } from "react-native";
 import RoundPhoto from "../../common/RoundPhoto";
 import TextWrapper from "../../common/TextWrapper";
 
-const NameAndPhoto = ({ url, name, lastName, size }) => {
+const NameAndPhoto = ({ url, name, lastName, size, style }) => {
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, ...style}}>
       <RoundPhoto size={size} url={url} />
       <View>
         <TextWrapper>

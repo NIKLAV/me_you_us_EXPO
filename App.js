@@ -1,21 +1,21 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import AllNavigation from "./src/navigations/index";
 import { store } from "./src/redux/store";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { interceptorAxios } from "./src/services/interceptors";
 
 const Index = ({ children }) => {
-  interceptorAxios();
+  const dispatch = useDispatch();
+  interceptorAxios(dispatch);
   return <>{children}</>;
 };
 
 export default function App() {
   return (
-    <Index>
-      <Provider store={store}>
+    <Provider store={store}>
+      <Index>
         <AllNavigation />
-      </Provider>
-    </Index>
+      </Index>
+    </Provider>
   );
 }
