@@ -3,14 +3,18 @@ import { View, StyleSheet } from "react-native";
 import NameAndPhoto from "../../../Settings/General/NameAndPhoto";
 import TextWrapper from "../../../common/TextWrapper";
 import { width } from "../../../../constants";
-const HeaderPost = () => {
+
+const HeaderPost = ({author}) => {
+  console.warn('author', author)
+  const {first_name, last_name, avatar} = author;
   return (
+    
     <View style={styles.container}>
       <NameAndPhoto
-        name="Jonatan"
-        lastName="Small"
+        name={first_name}
+        lastName={last_name}
         url={
-          "https://static9.depositphotos.com/1006075/1197/i/450/depositphotos_11973672-stock-photo-cupcakes.jpg"
+          avatar.url
         }
         style={styles.nameAndPhoto}
       />

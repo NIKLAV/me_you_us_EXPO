@@ -30,7 +30,7 @@ export const updateUserData = (user) => async (dispatch) => {
 };
 
 export const uploadUserPhoto = (photo) => async (dispatch) => {
-  console.warn(photo)
+  console.warn(photo);
   dispatch({ type: types.START_UPDATING_ACCOUNT_DATA });
   try {
     const { data, status } = await API.account.uploadPhoto(photo);

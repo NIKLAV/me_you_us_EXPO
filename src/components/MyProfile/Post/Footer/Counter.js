@@ -38,17 +38,10 @@ const Counter = ({ nameIcon, count }) => {
 
 const styles = StyleSheet.create({
   likeContaier: {
-    minWidth: 60,
+    width: 60,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  },
-  dislikeContaier: {
-    minWidth: 60,
-    /* marginLeft: 15, */
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
 });
 

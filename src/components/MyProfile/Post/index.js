@@ -5,10 +5,10 @@ import { MARGIN, width } from "../../../constants";
 import BodyPost from "./Body/BodyPost";
 import FooterPost from "./Footer/FooterPost";
 
-const Post = () => {
+const Post = ({data}) => {
   return (
     <View style={styles.container}>
-      <HeaderPost />
+      <HeaderPost author={data.author} />
       <BodyPost />
       <FooterPost/>
     </View>
