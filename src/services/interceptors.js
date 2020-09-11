@@ -3,8 +3,8 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { logout } from "../redux/auth/actions";
 import { navigation } from "./helpers";
 
-export const interceptorAxios = ({ dispatch }) => {
-  console.warn("intercept");
+export const interceptorAxios = ( dispatch ) => {
+  
   /* axios.interceptors.request.use(
     config => {
       const newConfig = config;
@@ -30,15 +30,16 @@ export const interceptorAxios = ({ dispatch }) => {
           /* history.replace(routes.newsfeed) */
         }
       }
-      /* if (response.config.url === '/api/logout' && response.status === 204) {
+      if (response.config.url === '/api/logout' && response.status === 204) {
         delete axios.defaults.headers.common.Authorization;
-      } */
+      } 
 
       return response;
     },
     (error) => {
       if (error.response && error.response.status === 401) {
         delete axios.defaults.headers.common.Authorization;
+        console.warn('err inter')
         dispatch(logout());
         navigation.navigate("Auth");
       }

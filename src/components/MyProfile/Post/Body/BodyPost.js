@@ -8,7 +8,7 @@ import {
 } from "../../../../constants";
 import TextWrapper from "../../../common/TextWrapper";
 
-const BodyPost = () => {
+const BodyPost = ({message}) => {
   return (
     <View style={styles.container}>
       <View>
@@ -22,9 +22,7 @@ const BodyPost = () => {
       </View>
       <View style={styles.textContainer}>
         <TextWrapper style={styles.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          vestibulum aliquam sagittis. Cras vestibulum, velit et pretium
-          iaculis, dui velit cursus massa, et sagittis
+          {message}
         </TextWrapper>
       </View>
     </View>

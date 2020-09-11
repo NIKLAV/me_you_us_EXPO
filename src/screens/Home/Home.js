@@ -1,5 +1,11 @@
-import React, { useEffect } from "react";
-import { Text, ScrollView, FlatList } from "react-native";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
+import {
+  Text,
+  ScrollView,
+  FlatList,
+  View,
+  ActivityIndicator,
+} from "react-native";
 import CustomStatusBar from "../../components/common/StatusBar";
 import HeaderProfile from "../../components/MyProfile/Header";
 import AddingPostField from "../../components/MyProfile/AddingPostField";
@@ -17,23 +23,47 @@ const HomeHeader = () => {
 };
 
 const Home = () => {
+  const [page, setPage] = useState(1)
+  console.warn("page", page); 
+  const loadMore = () => {
+    setPage(prev => prev + 1)
+  }
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMyFeeds());
-  }, [])
-    
+    dispatch(getMyFeeds(page));
+  }, [page]);
 
-  const data = useSelector((state) => state.feed.data.data);
-  console.warn('data in home', data)
+  const data = useSelector((state) => state.feed.data);
+  const loading = useSelector((state) => state.feed.loading);
+
+  /* console.warn("loading", loading); */
+
+  const footerList = () => {
+    return (
+      <>
+        {loading && (
+          <View>
+            <ActivityIndicator size={"large"} />
+          </View>
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       <CustomStatusBar />
+
       <FlatList
         data={data}
-        keyExtractor={({id}) => id.toString()}
-        renderItem={({item}) => <Post data={item}/>}
+        keyExtractor={({ id }) => id.toString()}
+        renderItem={({ item }) => <Post data={item} />}
+        onEndReachedThreshold={1}
+        onEndReached={loadMore}
         ListHeaderComponent={HomeHeader}
+        ListFooterComponent={footerList}
       />
     </>
   );

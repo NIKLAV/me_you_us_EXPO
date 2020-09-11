@@ -5,8 +5,7 @@ import IconWrapper from "../../../common/IconWrapper";
 import TextWrapper from "../../../common/TextWrapper";
 import { COLOR } from "../../../../constants";
 
-
-const sizeRound = 40;
+const sizeRound = 36;
 
 const Counter = ({ nameIcon, count }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -31,16 +30,18 @@ const Counter = ({ nameIcon, count }) => {
           color={isLiked ? "#fff" : COLOR.POST_FOOTER_LIKE_AND_DISLIKE_COLOR}
         />
       </IconWrapper>
-      <TextWrapper>{count}</TextWrapper>
+      <View style={{marginLeft: 10}}>
+        <TextWrapper>{count}</TextWrapper>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   likeContaier: {
-    width: 60,
+    /* width: 60, */
     flexDirection: "row",
-    justifyContent: "space-between",
+    /* justifyContent: "space-between", */
     alignItems: "center",
   },
 });

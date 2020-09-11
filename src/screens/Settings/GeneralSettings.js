@@ -42,7 +42,7 @@ const GeneralSettings = () => {
   const [email, setEmail] = useState(null);
   const [emailError, setEmailError] = useState(null);
 
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState(null);
 
   const [firstName, setFirstName] = useState(null);
@@ -90,58 +90,94 @@ const GeneralSettings = () => {
     if (name === fieldsNames.lastName) {
       if (value.length === 0) {
         setLastNameError(`The last name field is required.`);
-        return;
+        return true;
       }
       setLastNameError("");
-      return true;
+      return false;
     }
     if (name === fieldsNames.firstName) {
       if (value.length === 0) {
         setFirstNameError(`The first name field is required.`);
-        return;
+        return true;
       }
       setFirstNameError("");
-      return true;
+      return false;
     }
 
     if (name === fieldsNames.email) {
       if (emailValid(value)) {
         setEmailError("");
-        return true;
+        return false;
       }
       setEmailError("The email must be a valid email address.");
+      return true;
     }
     if (name === fieldsNames.phone) {
-      if (phoneValid(value)) {
+      if (value.length > 0 && phoneValid(value)) {
         setPhoneNumberError("");
-        return true;
-      }
+        return false;
+      } else if (value === "") return;
       setPhoneNumberError("The phone format is invalid.");
+      return true;
     }
+    return false
   };
 
   const save = () => {
+    const validValues = [
+      { name: fieldsNames.email, value: email },
+      { name: fieldsNames.lastName, value: lastName },
+      { name: fieldsNames.phone, value: phoneNumber },
+      { name: fieldsNames.firstName, value: firstName },
+    ];
+    const newE = validValues.filter((input) =>
+      validation(input.name, input.value)
+    );
+    console.warn('new', newE)
+    if (newE.length) return
     dispatch(
       uploadUserPhoto({
         encoded_image_data: base64Img,
         image_type: "profile_image",
       })
     );
-    dispatch(
-      updateUserData({
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        birth_date: date,
-        phone: phoneNumber,
-      })
-    );
+    if (phoneNumber.length === 0) {
+      dispatch(
+        updateUserData({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          birth_date: date,
+        })
+      );
+    } else
+      dispatch(
+        updateUserData({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          birth_date: date,
+          phone: phoneNumber,
+        })
+      );
   };
 
   const clearErrorFirstName = () => {
-    setFirstNameError(null)
+    setFirstNameError(null);
+  };
+
+  const clearErrorLastName = () => {
+    setLastNameError(null);
+  };
+
+  const clearErorEmail = () => {
+    setEmailError(null);
+  };
+
+  const clearErrorPhone = () => {
+    setPhoneNumberError(null)
   }
-  
+
   return (
     <ScrollView>
       <AccountSettings />
@@ -172,6 +208,7 @@ const GeneralSettings = () => {
             label="Change last name"
             onBlur={() => validation(fieldsNames.lastName, lastName)}
             errorMessage={lastNameError}
+            clearError={clearErrorLastName}
           />
           <SettingsInput
             date={true}
@@ -191,6 +228,7 @@ const GeneralSettings = () => {
             label="Email"
             onBlur={() => validation(fieldsNames.email, email)}
             errorMessage={emailError}
+            clearError={clearErorEmail}
           />
           <SettingsInput
             value={phoneNumber}
@@ -200,6 +238,7 @@ const GeneralSettings = () => {
             errorMessage={phoneNumberError}
             onBlur={() => validation(fieldsNames.phone, phoneNumber)}
             textContentType={"telephoneNumber"}
+            clearError={clearErrorPhone}
           />
 
           <CustomButton

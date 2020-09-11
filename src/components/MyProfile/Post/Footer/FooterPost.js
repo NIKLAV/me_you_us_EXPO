@@ -8,7 +8,7 @@ import IconWrapper from "../../../common/IconWrapper";
 import TextWrapper from "../../../common/TextWrapper";
 import Counter from "./Counter";
 
-const sizeRound = 40;
+const sizeRound = 36;
 
 const FooterPost = () => {
   return (

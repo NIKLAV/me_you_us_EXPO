@@ -10,6 +10,7 @@ export const getUserData = () => async (dispatch) => {
     dispatch({ type: types.SUCCESS_LOADING_ACCOUNT_DATA, payload: data[0] });
   } catch (error) {
     console.warn(error.response.data);
+    if (error?.response?.status === 401) return;
     let message = error?.response?.data;
     dispatch({ type: types.FAIL_LOADING_ACCOUNT_DATA, payload: message });
   }
@@ -24,6 +25,7 @@ export const updateUserData = (user) => async (dispatch) => {
     dispatch({ type: types.SUCCESS_UPDATING_ACCOUNT_DATA, payload: data });
   } catch (error) {
     console.warn(error.response.data);
+    if (error?.response?.status === 401) return;
     let message = error?.response?.data;
     dispatch({ type: types.FAIL_UPDATING_ACCOUNT_DATA, payload: message });
   }
@@ -31,15 +33,16 @@ export const updateUserData = (user) => async (dispatch) => {
 
 export const uploadUserPhoto = (photo) => async (dispatch) => {
   console.warn(photo);
-  dispatch({ type: types.START_UPDATING_ACCOUNT_DATA });
+  dispatch({ type: types.START_UPLOAD_PHOTO });
   try {
     const { data, status } = await API.account.uploadPhoto(photo);
     console.warn("data in upload", data);
     if (status < 200 && status >= 300) throw new Error("Something went wrong");
-    dispatch({ type: types.SUCCESS_UPDATING_ACCOUNT_DATA, payload: data });
+    dispatch({ type: types.SUCCESS_UPLOAD_PHOTO});
   } catch (error) {
     console.warn(error.response.data);
+    if (error?.response?.status === 401) return;
     let message = error?.response?.data;
-    dispatch({ type: types.FAIL_UPDATING_ACCOUNT_DATA, payload: message });
+    dispatch({ type: types.FAIL_UPLOAD_PHOTO, payload: message });
   }
 };
