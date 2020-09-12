@@ -1,11 +1,12 @@
 import React from "react";
 import { Text } from "react-native";
-import AccountSettings from "../../components/AccountSettings";
+import SubTab from "../../components/common/SubTab";
+import { COLOR } from "../../constants";
 
 const Advertisement = () => {
   return (
     <>
-      <AccountSettings />
+      <SubTab textFocusColor={COLOR.PRIMARY_COLOR} title={"Account settings"} />
       <Text>Advertisement</Text>
     </>
   );

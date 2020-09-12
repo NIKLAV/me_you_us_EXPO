@@ -20,7 +20,7 @@ const TopIcon = ({ isFocused, name }) => {
   const onPress = () => {
     if (name === "Logout") {
       dispatch(logout());
-      navigation.navigate("Auth");
+     /*  navigation.navigate("Auth"); */
     } else navigation.navigate(name);
   };
   return (
@@ -30,7 +30,7 @@ const TopIcon = ({ isFocused, name }) => {
           <HomeIcon name="home" color={color} size={25} />
         ) : name === "Settings" ? (
           <SettingsIcon name="user-edit" color={color} size={20} />
-        ) : name === "AllFriends" ? (
+        ) : name === "MyFriends" ? (
           <AllFriendsIcon name="user-alt" color={color} size={20} />
         ) : name === "Notification" ? (
           <NotificationIcon name="bell-alt" color={color} size={20} />

@@ -63,7 +63,7 @@ export const toBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-export const navigationRef = React.createRef();
+export const navigationRef = React.createRef(null);
 // export const navigation = navigationRef.current
 export function navigate(name, params) {
   navigationRef.current?.navigate(name, params);

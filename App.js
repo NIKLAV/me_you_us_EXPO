@@ -12,7 +12,7 @@ const Index = ({ children }) => {
 
 export default function App() {
   return (
-    <Provider store={store}>
+  <Provider store={store}>
       <Index>
         <AllNavigation />
       </Index>

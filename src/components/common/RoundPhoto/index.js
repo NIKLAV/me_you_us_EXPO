@@ -2,22 +2,23 @@ import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 
 const RoundPhoto = ({ url, size = 60 }) => {
-  const checkUrl = () => {
-    if (url && url.includes("file:")) {
-      return false;
+  
+  const checkUrl = (url) => {
+    if (url === null) return
+    if (url.includes("http") || url.includes('file:')) {
+      return url;
     }
-    return true;
+    return `http://77.120.241.80:8871/storage/${url}`;
   };
 
   return (
     <View>
       <Image
         style={[styles.image, { width: size, height: size }]}
-        source={
-          checkUrl()
+        source={{uri: checkUrl(url)}
+          /* checkUrl()
             ? { uri: `http://77.120.241.80:8871/storage/${url}` }
-            : { uri: url } 
-            
+            : { uri: url } */
         }
       />
     </View>

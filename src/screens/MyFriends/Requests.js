@@ -1,8 +1,17 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React from "react";
+import { StyleSheet, Text } from "react-native";
+import MyFriendsWrapper from "../../components/MyFriends/MyFriendsWrapper";
+
+import { COLOR } from "../../constants";
 
 const Requests = () => {
-  return <Text>Requests</Text>;
+  return (
+    <MyFriendsWrapper>
+      <Text>Requests</Text>
+    </MyFriendsWrapper>
+  );
 };
+
+const styles = StyleSheet.create({});
 
 export default Requests;

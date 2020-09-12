@@ -1,26 +1,14 @@
-import React, {
-  useEffect,
-  useCallback,
-  useState,
-  useRef,
-  useLayoutEffect,
-} from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
-import AccountSettings from "../../components/AccountSettings";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, ScrollView } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import SubTab from "../../components/common/SubTab";
 import NameAndPhoto from "../../components/Settings/General/NameAndPhoto";
 import {
   getUserData,
   updateUserData,
   uploadUserPhoto,
 } from "../../redux/account/actions";
-import { useDispatch, useSelector } from "react-redux";
+
 import { containerWidth, COLOR, width } from "../../constants";
 import { useFocusEffect } from "@react-navigation/native";
 import SettingsWrapper from "../../components/Settings/SettingsWraper";
@@ -28,12 +16,13 @@ import SettingsInput from "../../components/Settings/SettingsInput";
 import PhotoPicker from "../../components/Settings/General/ImagePicker";
 import CustomButton from "../../components/common/Button";
 import DatePicker from "../../components/Settings/General/DatePicker";
-import { emailValid, phoneValid, toBase64 } from "../../services/helpers";
+import { emailValid, phoneValid } from "../../services/helpers";
 
 const GeneralSettings = () => {
   const dispatch = useDispatch();
 
   const [currentImage, setCurrentImage] = useState(null);
+  console.warn(currentImage);
   const [base64Img, setbase64Img] = useState(null);
 
   const [showPicker, setShowPicker] = useState(false);
@@ -120,7 +109,7 @@ const GeneralSettings = () => {
       setPhoneNumberError("The phone format is invalid.");
       return true;
     }
-    return false
+    return false;
   };
 
   const save = () => {
@@ -133,8 +122,8 @@ const GeneralSettings = () => {
     const newE = validValues.filter((input) =>
       validation(input.name, input.value)
     );
-    console.warn('new', newE)
-    if (newE.length) return
+    console.warn("new", newE);
+    if (newE.length) return;
     dispatch(
       uploadUserPhoto({
         encoded_image_data: base64Img,
@@ -175,12 +164,12 @@ const GeneralSettings = () => {
   };
 
   const clearErrorPhone = () => {
-    setPhoneNumberError(null)
-  }
+    setPhoneNumberError(null);
+  };
 
   return (
     <ScrollView>
-      <AccountSettings />
+      <SubTab textFocusColor={COLOR.PRIMARY_COLOR} title={"Account settings"} />
 
       {!loading && Object.keys(data).length > 0 ? (
         <SettingsWrapper>

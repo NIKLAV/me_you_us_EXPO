@@ -12,7 +12,7 @@ export const getMyFeeds = (page) => async (dispatch) => {
     console.warn(error)
     console.warn(error?.response?.data);
     let message = error?.response?.data;
-    if (error.response.status === '401')
+    if (+error?.response?.status === 401) return
     dispatch({ type: types.FAIL_FETCH_MY_FEED });
   }
 };

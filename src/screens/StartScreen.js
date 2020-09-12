@@ -7,32 +7,35 @@ import { COLOR } from "../constants";
 import axios from "axios";
 
 const StartScreen = ({ navigation }) => {
-  
   const dispatch = useDispatch();
   useEffect(() => {
-    console.warn('effect')
+    console.warn("effect");
     const tryLogin = async () => {
-      const userData = await AsyncStorage.getItem("userData");
-      if (!userData) {
-        navigation.navigate("Auth");
-        return;
-      }
-      const transformedData = JSON.parse(userData);
-      const { token, time } = transformedData;
-      const expirationDate = new Date(time);
-     
-      if (expirationDate <= new Date() || !token) {
-        delete axios.defaults.headers.common.Authorization;
+      const token = await AsyncStorage.getItem("MYUtoken");
+      const time = await AsyncStorage.getItem("expirationTime");
+      console.warn('token i efect', token)
+      if (!token) {
+        
         navigation.navigate("Auth");
         return;
       }
 
+      const expirationDate = new Date(JSON.parse(time));
+
+      if (expirationDate <= new Date() || !token) {
+        
+        delete axios.defaults.headers.common.Authorization;
+        navigation.navigate("Auth");
+        return;
+      }
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       navigation.navigate("MainTopTabs");
       dispatch(authenticate(token));
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      
     };
     tryLogin();
-  }, [dispatch]);
+  }, [dispatch]); 
+
   return (
     <View
       style={{

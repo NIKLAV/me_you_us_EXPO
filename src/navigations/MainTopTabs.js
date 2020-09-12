@@ -8,33 +8,34 @@ import Chat from "../screens/Chat/Chat";
 import Notification from "../screens/Notification/Notification";
 import AllFriends from "../screens/MyFriends/AllFriends";
 import MainTopTabBar from "../components/MainTopTabBar";
-
+import Requests from "../screens/MyFriends/Requests";
 import Advertisement from "../screens/Settings/Advertisiment";
 import Security from "../screens/Settings/Security";
-import AuthStack from "./AuthStack";
 
 const Tab = createMaterialTopTabNavigator();
 const SetingsStack = createStackNavigator();
+const FriendsStack = createStackNavigator();
 
 const Settings = () => {
   return (
-    <SetingsStack.Navigator screenOptions={{ headerShown: false }}>
-      <SetingsStack.Screen
-        options={{ animationEnabled: false }}
-        name="GeneralSettings"
-        component={GeneralSettings}
-      />
-      <SetingsStack.Screen
-        options={{ animationEnabled: false }}
-        name="Advertisement"
-        component={Advertisement}
-      />
-      <SetingsStack.Screen
-        options={{ animationEnabled: false }}
-        name="Security"
-        component={Security}
-      />
+    <SetingsStack.Navigator
+      screenOptions={{ headerShown: false, animationEnabled: false }}
+    >
+      <SetingsStack.Screen name="GeneralSettings" component={GeneralSettings} />
+      <SetingsStack.Screen name="Advertisement" component={Advertisement} />
+      <SetingsStack.Screen name="Security" component={Security} />
     </SetingsStack.Navigator>
+  );
+};
+
+const MyFriends = () => {
+  return (
+    <FriendsStack.Navigator
+      screenOptions={{ headerShown: false, animationEnabled: false }}
+    >
+      <FriendsStack.Screen name="Requests" component={Requests} />
+      <FriendsStack.Screen name="AllFriends" component={AllFriends} />
+    </FriendsStack.Navigator>
   );
 };
 
@@ -46,9 +47,9 @@ const MainTopTabs = () => {
       lazy
       /* removeClippedSubviews */
     >
-      <Tab.Screen  name="Home" component={Home} />
+      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Wallet" component={Wallet} />
-      <Tab.Screen name="AllFriends" component={AllFriends} />
+      <Tab.Screen name="MyFriends" component={MyFriends} />
       <Tab.Screen name="Notification" component={Notification} />
       <Tab.Screen name="Settings" component={Settings} />
       <Tab.Screen name="Chat" component={Chat} />

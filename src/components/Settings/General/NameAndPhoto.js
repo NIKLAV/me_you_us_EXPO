@@ -3,11 +3,11 @@ import { View, Text, StyleSheet } from "react-native";
 import RoundPhoto from "../../common/RoundPhoto";
 import TextWrapper from "../../common/TextWrapper";
 
-const NameAndPhoto = ({ url, name, lastName, size, style }) => {
+const NameAndPhoto = ({ url, name, lastName, size, style, nameContainerStyle }) => {
   return (
     <View style={{...styles.container, ...style}}>
       <RoundPhoto size={size} url={url} />
-      <View>
+      <View style={nameContainerStyle}>
         <TextWrapper>
           {name} {lastName}
         </TextWrapper>
@@ -18,7 +18,7 @@ const NameAndPhoto = ({ url, name, lastName, size, style }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    /* width: "100%", */
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row'

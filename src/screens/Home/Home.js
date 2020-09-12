@@ -13,6 +13,7 @@ import Post from "../../components/MyProfile/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyFeeds } from "../../redux/feed/actions";
 
+
 const HomeHeader = () => {
   return (
     <>
@@ -22,12 +23,16 @@ const HomeHeader = () => {
   );
 };
 
+
+
 const Home = () => {
-  const [page, setPage] = useState(1)
-  console.warn("page", page); 
+  /* const token = useSelector(state => state.auth.token) */
+  const [page, setPage] = useState(1);
+  console.warn("page", page);
   const loadMore = () => {
-    setPage(prev => prev + 1)
-  }
+    /* setPage((prev) => prev + 1); */
+    setPage(page + 1);
+  };
 
   const dispatch = useDispatch();
 
@@ -56,15 +61,16 @@ const Home = () => {
     <>
       <CustomStatusBar />
 
-      <FlatList
+      {/* <FlatList
+        scrollEventThrottle={16}
         data={data}
-        keyExtractor={({ id }) => id.toString()}
+        keyExtractor={(item, index) => item.id.toString() + index}
         renderItem={({ item }) => <Post data={item} />}
         onEndReachedThreshold={1}
         onEndReached={loadMore}
         ListHeaderComponent={HomeHeader}
         ListFooterComponent={footerList}
-      />
+      /> */}
     </>
   );
 };

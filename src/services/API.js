@@ -14,5 +14,5 @@ export const account = {
 };
 
 export const feeds = {
-  getMyFeeds: (page) => axios.get(`feeds?per_page=2&page=${page}`),
+  getMyFeeds: (page) => axios.get(`feeds?per_page=8&page=${page}`),
 };

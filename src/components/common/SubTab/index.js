@@ -1,20 +1,26 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { useNavigationState, useNavigation } from "@react-navigation/native";
-import TextWrapper from "../common/TextWrapper";
-import { containerWidth } from "../../constants";
+import TextWrapper from "../TextWrapper";
+import { containerWidth } from "../../../constants";
 import Tab from "./Tab";
 
-const AccountSettings = () => {
+const SubTab = ({
+  title,
+  buttonsContainerStyle,
+  textFocusColor,
+  buttonFocusColor,
+  buttonStyle,
+}) => {
   const state = useNavigationState((state) => state);
 
   return (
     <View style={{ backgroundColor: "#fff", marginVertical: 10 }}>
       <View style={styles.container}>
         <View>
-          <TextWrapper>Account settings</TextWrapper>
+          <TextWrapper>{title}</TextWrapper>
         </View>
-        <View style={styles.buttons}>
+        <View style={{ ...styles.buttons, ...buttonsContainerStyle }}>
           {state.routeNames.map((el, index) => {
             const isFocused = index === state.index;
             return (
@@ -22,6 +28,9 @@ const AccountSettings = () => {
                 isFocused={isFocused}
                 key={index + Math.random()}
                 text={el}
+                textFocusColor={textFocusColor}
+                buttonFocusColor={buttonFocusColor}
+                buttonStyle={buttonStyle}
               />
             );
           })}
@@ -45,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccountSettings;
+export default SubTab;
