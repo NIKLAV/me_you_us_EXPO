@@ -20,7 +20,9 @@ export const interceptorAxios = (dispatch) => {
 
   return axios.interceptors.response.use(
     async (response) => {
-      if (response.config.url === "/api/login") {
+      console.warn('int')
+      if (response.config.url === "login") {
+        console.warn('int in if')
         const token =   response?.data?.token;
         console.warn("token in int", token);
         await AsyncStorage.setItem("MYUtoken", token);
@@ -29,7 +31,7 @@ export const interceptorAxios = (dispatch) => {
           /* history.replace(routes.newsfeed) */
         }
       }
-    if (response.config.url === "/api/logout" && response.status === 204) {
+    if (response.config.url === "logout" && response.status === 204) {
         delete axios.defaults.headers.common.Authorization;
       } 
 

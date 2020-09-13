@@ -16,11 +16,13 @@ const StartScreen = ({ navigation }) => {
       console.warn('token i efect', token)
       if (!token) {
         
+        delete axios.defaults.headers.common.Authorization;
         navigation.navigate("Auth");
         return;
       }
 
       const expirationDate = new Date(JSON.parse(time));
+      console.warn(expirationDate, new Date())
 
       if (expirationDate <= new Date() || !token) {
         

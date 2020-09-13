@@ -1,11 +1,11 @@
 import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { COLOR } from "../../../constants";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { COLOR, height } from "../../../constants";
 import SubTab from "../../common/SubTab";
 
 const MyFriendsWrapper = ({ children }) => {
   return (
-    <ScrollView>
+    <View style={{minHeight: height}}>
       <SubTab
         buttonFocusColor={COLOR.POST_FOOTER_TELEGA_AND_SHARE_COLOR}
         textFocusColor={"#fff"}
@@ -14,7 +14,7 @@ const MyFriendsWrapper = ({ children }) => {
         title={"My friends"}
       />
       {children}
-    </ScrollView>
+    </View>
   );
 };
 

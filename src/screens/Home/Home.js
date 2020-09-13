@@ -36,9 +36,9 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+/*   useEffect(() => {
     dispatch(getMyFeeds(page));
-  }, [page]);
+  }, [page]); */
 
   const data = useSelector((state) => state.feed.data);
   const loading = useSelector((state) => state.feed.loading);
