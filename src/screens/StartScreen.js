@@ -22,8 +22,6 @@ const StartScreen = ({ navigation }) => {
       }
 
       const expirationDate = new Date(JSON.parse(time));
-      console.warn(expirationDate, new Date())
-
       if (expirationDate <= new Date() || !token) {
         
         delete axios.defaults.headers.common.Authorization;

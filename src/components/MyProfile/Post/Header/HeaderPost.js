@@ -1,25 +1,43 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import NameAndPhoto from "../../../Settings/General/NameAndPhoto";
 import TextWrapper from "../../../common/TextWrapper";
 import { width } from "../../../../constants";
+import { openModalInProfile } from "../../../../redux/modal/actions";
+import * as types from '../../../../redux/types'
 
-const HeaderPost = ({ author, publish_at }) => {
-  
+const HeaderPost = ({ author, publish_at, id }) => {
+  const dispatch = useDispatch()
+
   let { first_name, last_name, avatar } = author;
+
+  const onPress = () => {
+    dispatch({type: types.ADD_DATA_IN_PROFILE_MODAL, payload: id })
+    openModalInProfile()
+    
+  }
 
   return (
     <View style={styles.container}>
-      <NameAndPhoto
-        name={first_name}
-        lastName={last_name}
-        url={
-          avatar
-            ? avatar.url
-            : "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg"
-        }
-        style={styles.nameAndPhoto}
-      />
+      <View
+        style={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
+        <NameAndPhoto
+          name={first_name}
+          lastName={last_name}
+          url={avatar.url}
+          style={styles.nameAndPhoto}
+        />
+        <TouchableOpacity onPress={onPress}>
+          <Icon name="ellipsis-h" size={22} color={"#b1b3b7"} />
+        </TouchableOpacity>
+      </View>
       <View style={styles.createdAt}>
         <TextWrapper style={{ textAlign: "center" }}>{publish_at}</TextWrapper>
       </View>

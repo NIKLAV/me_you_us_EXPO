@@ -5,20 +5,15 @@ import RoundPhoto from "../../common/RoundPhoto";
 import { COLOR, width } from "../../../constants";
 import MessageInput from "../../common/MessageInput";
 import IconWrapper from "../../common/IconWrapper";
+import { useSelector } from "react-redux";
 
 const AddingPostField = () => {
+  const url = useSelector((state) => state.account.avatarUrl);
   return (
     <View style={styles.container}>
-      <View>
-        <RoundPhoto
-          url={
-            "https://vignette.wikia.nocookie.net/zlodei/images/9/98/Ph28.jpeg/revision/latest/top-crop/width/360/height/450?cb=20140629112400&path-prefix=ru"
-          }
-          size={42}
-        />
-      </View>
-      <MessageInput placeholder='What’s new?'/>
-      <IconWrapper activeOpacity={0.7}  style={{backgroundColor: "#7dcfff"}}>
+      <View>{url && <RoundPhoto url={url} size={42} />}</View>
+      <MessageInput placeholder="What’s new?" />
+      <IconWrapper activeOpacity={0.7} style={{ backgroundColor: "#7dcfff" }}>
         <CameraIcon size={22} name="camera-plus" color="#fff" />
       </IconWrapper>
     </View>
@@ -30,11 +25,10 @@ const styles = StyleSheet.create({
     height: 80,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     paddingHorizontal: 5,
     backgroundColor: COLOR.BACK_MAIN_TOP_TABBAR_COLOR,
   },
-  
 });
 
 export default AddingPostField;

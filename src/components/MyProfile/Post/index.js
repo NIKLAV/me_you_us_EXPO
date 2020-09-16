@@ -6,10 +6,10 @@ import BodyPost from "./Body/BodyPost";
 import FooterPost from "./Footer/FooterPost";
 
 const Post = ({ data }) => {
-  const { publish_at, message } = data;
+  const { publish_at, message, id } = data;
   return (
     <View style={styles.container}>
-      <HeaderPost author={data.author} publish_at={publish_at} />
+      <HeaderPost author={data.author} publish_at={publish_at} id={id} />
       <BodyPost message={message} />
       <FooterPost />
     </View>

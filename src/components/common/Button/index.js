@@ -9,16 +9,37 @@ import {
 } from "react-native";
 import { width, FONT_SIZE } from "../../../constants";
 
-const CustomButton = ({ styleButton, styleText, text, onPress, disabled }) => {
+const CustomButton = ({
+  styleButton,
+  styleText,
+  text,
+  onPress,
+  disabled,
+  icon,
+  children,
+}) => {
   /* const ButtonWrapper = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity */
   return (
-    <TouchableOpacity
-      disabled={disabled}
-      onPress={onPress}
-      style={{ ...styles.default, ...styleButton }}
-    >
-      <Text style={{ ...styles.defaultText, ...styleText }}>{text}</Text>
-    </TouchableOpacity>
+    <>
+      {icon ? (
+        <TouchableOpacity
+          disabled={disabled}
+          onPress={onPress}
+          style={{ ...styles.default, ...styleButton }}
+        >
+          <View style={{ position: "absolute", left: 15 }}>{children}</View>
+          <Text style={{ ...styles.defaultText, ...styleText }}>{text}</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          disabled={disabled}
+          onPress={onPress}
+          style={{ ...styles.default, ...styleButton }}
+        >
+          <Text style={{ ...styles.defaultText, ...styleText }}>{text}</Text>
+        </TouchableOpacity>
+      )}
+    </>
   );
 };
 

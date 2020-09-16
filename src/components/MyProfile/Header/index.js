@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { height, COLOR, MARGIN, width, FONT_SIZE } from "../../../constants";
 import EdditProfileButton from "./EdditProfileButton";
 import RoundPhoto from "../../common/RoundPhoto";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TextWrapper from "../../common/TextWrapper";
+import { getUserData } from "../../../redux/account/actions";
 
 const HeaderProfile = () => {
-  /* const avatarUrl = useSelector(state => state.account.avatar.) */
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserData());
+  }, []);
+
+  const avatarUrl = useSelector((state) => state.account.avatarUrl);
+  const { first_name, last_name } = useSelector((state) => state.account.data);
+  /* const loading = useSelector((state) => state.account.loading); */
+
   return (
     <View style={styles.container}>
       <EdditProfileButton />
@@ -16,12 +26,11 @@ const HeaderProfile = () => {
         source={require("../../../assets/img/my_profile/header_bg.png")}
       />
       <View style={styles.avatar}>
-        <RoundPhoto
-          size={height / 5}
-          url="https://i.ytimg.com/vi/upAB-mpGGsc/maxresdefault.jpg"
-        />
-        <View style={{marginVertical: 15}}>
-          <TextWrapper style={styles.text}>Imya Familiya</TextWrapper>
+        {avatarUrl && <RoundPhoto size={height / 5.5} url={avatarUrl} />}
+        <View style={{ marginVertical: 15 }}>
+          <TextWrapper style={styles.text}>
+            {first_name} {last_name}
+          </TextWrapper>
         </View>
       </View>
     </View>

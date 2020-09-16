@@ -1,18 +1,14 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import {
-  Text,
-  ScrollView,
-  FlatList,
-  View,
-  ActivityIndicator,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, View, ActivityIndicator, Text } from "react-native";
 import CustomStatusBar from "../../components/common/StatusBar";
 import HeaderProfile from "../../components/MyProfile/Header";
 import AddingPostField from "../../components/MyProfile/AddingPostField";
 import Post from "../../components/MyProfile/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyFeeds } from "../../redux/feed/actions";
-
+import { getUserData } from "../../redux/account/actions";
+import BottomSheet from "../../components/MyFriends/BottomSheet";
+import { closeModalInProfile } from "../../redux/modal/actions";
 
 const HomeHeader = () => {
   return (
@@ -23,12 +19,10 @@ const HomeHeader = () => {
   );
 };
 
-
-
 const Home = () => {
   /* const token = useSelector(state => state.auth.token) */
   const [page, setPage] = useState(1);
-  console.warn("page", page);
+  /*   console.warn("page", page); */
   const loadMore = () => {
     /* setPage((prev) => prev + 1); */
     setPage(page + 1);
@@ -36,14 +30,17 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-/*   useEffect(() => {
+  useEffect(() => {
+    if (page > lastPage) return;
     dispatch(getMyFeeds(page));
-  }, [page]); */
+  }, [page]);
 
   const data = useSelector((state) => state.feed.data);
   const loading = useSelector((state) => state.feed.loading);
-
-  /* console.warn("loading", loading); */
+  const lastPage = useSelector((state) => state.feed.lastPage);
+  const isOpenInProfile = useSelector((state) => state.modal.isOpenInProfile);
+  const postId = useSelector((state) => state.modal.profileData)
+  /* const avatar = useSelector((state => state.account.data.avatar.url)) */
 
   const footerList = () => {
     return (
@@ -61,7 +58,7 @@ const Home = () => {
     <>
       <CustomStatusBar />
 
-      {/* <FlatList
+      <FlatList
         scrollEventThrottle={16}
         data={data}
         keyExtractor={(item, index) => item.id.toString() + index}
@@ -70,7 +67,14 @@ const Home = () => {
         onEndReached={loadMore}
         ListHeaderComponent={HomeHeader}
         ListFooterComponent={footerList}
-      /> */}
+      />
+
+      <BottomSheet
+        isOpen={isOpenInProfile}
+        dispatchToClose={closeModalInProfile}
+      >
+       {postId && <Text>{postId}</Text>}
+      </BottomSheet>
     </>
   );
 };

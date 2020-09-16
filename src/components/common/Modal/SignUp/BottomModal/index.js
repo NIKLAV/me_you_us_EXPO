@@ -1,31 +1,25 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from "react";
+import React, { forwardRef, useImperativeHandle, useState } from "react";
 import {
   StyleSheet,
   Animated,
   TouchableWithoutFeedback,
   PanResponder,
-  TouchableOpacity,
-  Text,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import * as types from "../../../redux/types";
+import * as types from '../../../redux/types'
 import { useDispatch, useSelector } from "react-redux";
 
 import { height } from "../../../constants";
+import { useIsFocused } from "@react-navigation/native";
 
-const BottomSheet = ({ children, dispatchToClose, isOpen }, ref) => {
-  const dispatch = useDispatch();
-  /* const postId = useSelector((state) => state.modal.profileData); */
+const BottomModal = (props, ref) => {
+  const isOpen = useSelector(state => state.modal.isOpen)
+  const dispatch = useDispatch()
 
+  console.warn("render");
   let [cardHeight, setCardHeight] = useState(0);
-  const backDropVisible = new Animated.Value(0);
+  const backDropVisible = new Animated.Value(1);
 
-  const bottom = new Animated.Value((height / 1.5) * 3);
+  const bottom = new Animated.Value(0);
 
   const pandResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (_, gestureState) => true,
@@ -37,7 +31,7 @@ const BottomSheet = ({ children, dispatchToClose, isOpen }, ref) => {
       if (dy > percentageToClose) {
         return close();
       }
-      animatedIn();
+      open();
     },
   });
 
@@ -47,50 +41,37 @@ const BottomSheet = ({ children, dispatchToClose, isOpen }, ref) => {
   }
 
   const animateOut = () => {
-    return new Promise((resolve) => {
-      Animated.timing(bottom, {
-        toValue: cardHeight,
-        useNativeDriver: false,
-      }).start(() => {
-        resolve();
-      });
+    Animated.timing(bottom, {
+      toValue: cardHeight,
+      useNativeDriver: false,
+    }).start(() => {
+      backDropVisible.setValue(0);
     });
   };
 
-  function open() {
+  function open  () {
     animatedIn();
+    
   }
 
   function close() {
-    isOpen &&
-      animateOut().then(() => {
-        backDropVisible.setValue(0);
-        dispatchToClose();
-      });
-
-    /*  dispatch({ type: types.CLOSE_MODAL_IN_FRIENDS }); */
+    /* dispatch(types.CLOSE_MODAL) */
+    animateOut();
   }
 
-  /* useImperativeHandle(ref, () => ({ open, close })); */
 
-  useEffect(() => {
-    if (isOpen) {
-      open();
-    } else {
-      close();
-    }
-  }, [isOpen]);
+
 
   return (
     <>
-      
+    
       <TouchableWithoutFeedback onPress={close} style={styles.backButton}>
         <Animated.View
           style={[
             styles.backdrop,
             {
               opacity: bottom.interpolate({
-                inputRange: [0, height / 1.5],
+                inputRange: [0, cardHeight],
                 outputRange: [1, 0],
                 extrapolate: "clamp",
               }),
@@ -117,22 +98,27 @@ const BottomSheet = ({ children, dispatchToClose, isOpen }, ref) => {
             transform: [
               {
                 translateY: bottom.interpolate({
-                  inputRange: [0, height / 1.5],
-                  outputRange: [0, height / 1.5],
+                  inputRange: [0, cardHeight],
+                  outputRange: [0, cardHeight],
                   extrapolate: "clamp",
                 }),
               },
             ],
           },
         ]}
-      >
-        {children}
-      </Animated.View>
+      ></Animated.View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  /* but: {
+    position: "absolute",
+    right: 0,
+    left: 0,
+    bottom: 0,
+    top: 0,
+  }, */
   backdrop: {
     position: "absolute",
     right: 0,
@@ -150,7 +136,8 @@ const styles = StyleSheet.create({
     height: height / 1.5,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
+    /* zIndex: 100, */
   },
 });
 
-export default forwardRef(BottomSheet);
+export default BottomModal;

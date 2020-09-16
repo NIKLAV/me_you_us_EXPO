@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { COLOR, height } from "../../../constants";
+import { COLOR, height, width } from "../../../constants";
 import SubTab from "../../common/SubTab";
 
 const MyFriendsWrapper = ({ children }) => {
@@ -21,10 +21,11 @@ const MyFriendsWrapper = ({ children }) => {
 const styles = StyleSheet.create({
   buttonsContainerStyle: {
     justifyContent: "space-between",
-    width: 170,
+    width: width / 1.6,
   },
   buttonStyle: {
     borderColor: COLOR.POST_FOOTER_TELEGA_AND_SHARE_COLOR,
+    paddingHorizontal: 20
   },
 });
 

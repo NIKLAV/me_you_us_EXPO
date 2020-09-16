@@ -15,4 +15,6 @@ export const account = {
 
 export const feeds = {
   getMyFeeds: (page) => axios.get(`feeds?per_page=8&page=${page}`),
+  addNewFeed: (body) => axios.post(`feeds`, body),
+  deleteFeed: (id) => axios.delete(`feeds/${id}`)
 };
