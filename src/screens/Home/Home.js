@@ -39,7 +39,7 @@ const Home = () => {
   const loading = useSelector((state) => state.feed.loading);
   const lastPage = useSelector((state) => state.feed.lastPage);
   const isOpenInProfile = useSelector((state) => state.modal.isOpenInProfile);
-  const postId = useSelector((state) => state.modal.profileData)
+  const postId = useSelector((state) => state.modal.profileData) 
   /* const avatar = useSelector((state => state.account.data.avatar.url)) */
 
   const footerList = () => {
@@ -58,7 +58,7 @@ const Home = () => {
     <>
       <CustomStatusBar />
 
-      <FlatList
+     <FlatList
         scrollEventThrottle={16}
         data={data}
         keyExtractor={(item, index) => item.id.toString() + index}
@@ -74,7 +74,7 @@ const Home = () => {
         dispatchToClose={closeModalInProfile}
       >
        {postId && <Text>{postId}</Text>}
-      </BottomSheet>
+      </BottomSheet> 
     </>
   );
 };

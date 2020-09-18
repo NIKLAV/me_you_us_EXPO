@@ -18,3 +18,8 @@ export const feeds = {
   addNewFeed: (body) => axios.post(`feeds`, body),
   deleteFeed: (id) => axios.delete(`feeds/${id}`)
 };
+
+export const chats = {
+  getChats: () => axios.get(`threads`),
+  deleteChat: (id) => axios.delete(`threads/${id}`)
+}

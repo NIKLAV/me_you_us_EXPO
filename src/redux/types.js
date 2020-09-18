@@ -50,3 +50,12 @@ export const OPEN_MODAL_IN_PROFILE = "OPEN_MODAL_IN_PROFILE";
 export const CLOSE_MODAL_IN_PROFILE = "CLOSE_MODAL_IN_PROFILE";
 export const ADD_DATA_IN_PROFILE_MODAL = "ADD_DATA_IN_PROFILE_MODAL";
 
+//---------------------------CHATS_FETCH-------------------------------//
+export const START_FETCH_MY_CHATS = "START_FETCH_MY_CHATS";
+export const SUCCESS_FETCH_MY_CHATS = "SUCCESS_FETCH_MY_CHATS";
+export const FAIL_FETCH_MY_CHATS = "FAIL_FETCH_MY_CHATS";
+
+//---------------------------CHAT_DELETE-------------------------------//
+export const START_DELETE_CHAT = "START_DELETE_CHAT";
+export const SUCCESS_DELETE_CHAT = "SUCCESS_DELETE_CHAT";
+export const FAIL_DELETE_CHAT = "FAIL_DELETE_CHAT";
