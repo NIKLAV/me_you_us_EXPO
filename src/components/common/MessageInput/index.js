@@ -3,37 +3,26 @@ import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 import TelegaIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import { width, COLOR } from "../../../constants";
-import { createNewFeed } from "../../../redux/feed/actions";
 
-const MessageInput = ({ placeholder, onChangeText, value }) => {
-  /* const handleAddPost = () => {
-    if (messagePost.message !== '') {
-      dispatch(addFeed(messagePost))
-        .then(() => dispatch(getFeeds()))
-        .then(() => dispatch(getProfileFeeds(currentUser?.id)))
-        .then(() => setMessagePost({ message: '' }))
-    }
-  }
- */
+const MessageInput = ({ placeholder, setValue, value, thunk, iconColor="#93969e" }) => {
   const dispatch = useDispatch();
-  const [text, setText] = useState("");
 
   const onPress = () => {
-    if (text.trim().length === 0) {
+    if (value.trim().length === 0) {
       return;
     }
-    dispatch(createNewFeed({ message: text }));
-    setText('')
+    dispatch(thunk({ message: value }));
+    setValue("");
   };
   return (
     <View style={styles.input}>
       <TextInput
-        value={text}
-        onChangeText={setText}
+        value={value}
+        onChangeText={setValue}
         placeholder={placeholder}
       />
       <TouchableOpacity onPress={onPress}>
-        <TelegaIcon size={25} color="#93969e" name="telegram" />
+        <TelegaIcon size={25} color={iconColor} name="telegram" />
       </TouchableOpacity>
     </View>
   );

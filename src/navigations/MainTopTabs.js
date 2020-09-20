@@ -11,10 +11,13 @@ import MainTopTabBar from "../components/MainTopTabBar";
 import Requests from "../screens/MyFriends/Requests";
 import Advertisement from "../screens/Settings/Advertisiment";
 import Security from "../screens/Settings/Security";
+import ChatWithBro from "../screens/Chat/ChatWithBro";
+import { MARGIN } from "../constants";
 
 const Tab = createMaterialTopTabNavigator();
 const SetingsStack = createStackNavigator();
 const FriendsStack = createStackNavigator();
+const ChatStack = createStackNavigator();
 
 const Settings = () => {
   return (
@@ -38,6 +41,23 @@ const MyFriends = () => {
     </FriendsStack.Navigator>
   );
 };
+
+/* export const ChatScreens = () => {
+  return (
+    <ChatStack.Navigator>
+      <ChatStack.Screen
+        options={{ headerShown: false }}
+        name="Chat"
+        component={Chat}
+      />
+      <ChatStack.Screen
+        options={{ headerStyle: { marginTop: MARGIN.DEFAULT_MARGIN_VERTICAL } }}
+        name="ChatWithBro"
+        component={ChatWithBro}
+      />
+    </ChatStack.Navigator>
+  );
+}; */
 
 const MainTopTabs = () => {
   return (

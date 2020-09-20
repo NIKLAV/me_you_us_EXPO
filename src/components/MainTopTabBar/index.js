@@ -8,6 +8,7 @@ import Logo from "../common/Logo/Logo";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const MainTopTabBar = ({state}) => {
+  
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.BACK_MAIN_TOP_TABBAR_COLOR }}>
       <View style={styles.container}>

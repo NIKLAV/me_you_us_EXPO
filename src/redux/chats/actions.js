@@ -32,3 +32,27 @@ export const deleteMyChat = (id) => async (dispatch) => {
     dispatch({ type: types.FAIL_DELETE_CHAT });
   }
 };
+
+export const getCurrentPartnerData = (first_name, last_name) => (dispatch) => {
+  dispatch({
+    type: types.ADD_DATA_IN_CHAT,
+    payload: { first_name, last_name },
+  });
+};
+
+export const getMessages = (id) => async (dispatch) => {
+  dispatch({ type: types.START_GETTING_MESSAGES });
+  try {
+    const { data, status } = await API.chats.getMessagesFromChat(id);
+    console.warn("data in getmymessages", data);
+    if (status < 200 && status >= 300) throw new Error("Something went wrong");
+    dispatch({ type: types.SUCCESS_GETTING_MESSAGES, payload: data });
+  } catch (error) {
+    console.warn("error in getchats", error);
+    console.warn(error?.response?.data);
+    let message = error?.response?.data;
+    if (+error?.response?.status === 401) return;
+    dispatch({ type: types.FAIL_GETTING_MESSAGES });
+  }
+};
+

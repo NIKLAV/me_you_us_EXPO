@@ -44,7 +44,7 @@ const GeneralSettings = () => {
     setShowPicker(!showPicker);
   };
   const data = useSelector((state) => state.account.data);
-  console.log("data", data);
+  /* console.log("data", data); */
   useEffect(() => {
     dispatch(getUserData());
   }, []);
@@ -102,12 +102,13 @@ const GeneralSettings = () => {
       return true;
     }
     if (name === fieldsNames.phone) {
-      if (value.length > 0 && phoneValid(value)) {
-        setPhoneNumberError("");
-        return false;
-      } else if (value === "") return;
+      console.log(value);
+      if (value === "") return;
       setPhoneNumberError("The phone format is invalid.");
       return true;
+    } else if (value.length > 0 && phoneValid(value)) {
+      setPhoneNumberError("");
+      return false;
     }
     return false;
   };
@@ -122,7 +123,7 @@ const GeneralSettings = () => {
     const newE = validValues.filter((input) =>
       validation(input.name, input.value)
     );
-    console.warn("new", newE);
+
     if (newE.length) return;
     dispatch(
       uploadUserPhoto({

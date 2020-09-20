@@ -6,8 +6,6 @@ import TextWrapper from "../../components/common/TextWrapper";
 import { containerWidth, MARGIN, width } from "../../constants";
 import { getMyChats } from "../../redux/chats/actions";
 
-/* const data = [1, 2, 3, 4, 5, 6, 7, 8]; */
-
 const Chat = () => {
   const dispatch = useDispatch();
 
@@ -24,11 +22,15 @@ const Chat = () => {
           <TextWrapper>Chat</TextWrapper>
         </View>
         <FlatList
-          keyExtractor={( item ) => item.id.toString()}
+          keyExtractor={(item) => item.id.toString()}
           showsVerticalScrollIndicator={false}
           data={data}
           renderItem={({ item }) => (
-            <ChatItem id={item.id} lastMessageInfo={item.last_massage} />
+            <ChatItem
+              id={item.id}
+              lastMessageInfo={item.last_massage}
+              partner={item.partner}
+            />
           )}
         />
       </View>

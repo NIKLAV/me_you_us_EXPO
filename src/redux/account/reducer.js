@@ -3,7 +3,8 @@ import * as types from "../types";
 const initialState = {
   loading: false,
   data: {},
-  avatarUrl: null
+  avatarUrl: null,
+  id: null,
 };
 
 const accountReducer = (state = initialState, { type, payload }) => {
@@ -15,7 +16,13 @@ const accountReducer = (state = initialState, { type, payload }) => {
       return { ...state };
     case types.SUCCESS_LOADING_ACCOUNT_DATA:
     case types.SUCCESS_UPDATING_ACCOUNT_DATA:
-      return { ...state, loading: false, data: payload, avatarUrl: payload.avatar.url };
+      return {
+        ...state,
+        loading: false,
+        data: payload,
+        avatarUrl: payload.avatar.url,
+        id: payload.id,
+      };
     case types.SUCCESS_UPLOAD_PHOTO:
       return { ...state };
     case types.FAIL_UPLOAD_PHOTO:

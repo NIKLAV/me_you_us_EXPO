@@ -21,5 +21,6 @@ export const feeds = {
 
 export const chats = {
   getChats: () => axios.get(`threads`),
-  deleteChat: (id) => axios.delete(`threads/${id}`)
+  deleteChat: (id) => axios.delete(`threads/${id}`),
+  getMessagesFromChat: (id) => axios.get(`threads/${id}`)
 }

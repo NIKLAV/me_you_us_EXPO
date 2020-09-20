@@ -3,7 +3,10 @@ import { Dimensions } from "react-native";
 export const { width, height } = Dimensions.get("window");
 export const containerWidth = width - 50 ;
 export const TOP_ICON_SIZE = 40;
-export const POST_PHOTO_HEIGHT = height / 2.2
+export const POST_PHOTO_HEIGHT = height / 2.2;
+export const CHAT_CONTAINER_WIDTH = width - 20;
+export const SIZE_PHOTO = 50;
+export const SPACE_BETWEEN_PHOTO_AND_MESSAGE = 15;
 
 export const COLOR = {
   LOGO_TEXT_COLOR: "#fff",

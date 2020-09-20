@@ -4,6 +4,8 @@ import { COLOR, height, width } from "../../../constants";
 import RoundPhoto from "../../common/RoundPhoto";
 import CustomButton from "../../common/Button";
 import TextWrapper from "../../common/TextWrapper";
+import { useNavigation } from "@react-navigation/native";
+
 const Request = () => {
   return (
     <View style={styles.container}>
@@ -14,7 +16,13 @@ const Request = () => {
         size={70}
       />
 
-      <View style={{ flexDirection: "column", justifyContent: 'space-between', height: 64}}>
+      <View
+        style={{
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: 64,
+        }}
+      >
         <View /* style={styles.nameContainer} */>
           <TextWrapper>Some Name</TextWrapper>
         </View>

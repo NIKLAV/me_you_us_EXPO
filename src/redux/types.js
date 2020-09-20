@@ -59,3 +59,12 @@ export const FAIL_FETCH_MY_CHATS = "FAIL_FETCH_MY_CHATS";
 export const START_DELETE_CHAT = "START_DELETE_CHAT";
 export const SUCCESS_DELETE_CHAT = "SUCCESS_DELETE_CHAT";
 export const FAIL_DELETE_CHAT = "FAIL_DELETE_CHAT";
+
+//---------------------------CHAT_USER_DATA-------------------------------//
+
+export const ADD_DATA_IN_CHAT = "ADD_DATA_IN_CHAT";
+
+//---------------------------CHAT_USER_DATA-------------------------------//
+export const START_GETTING_MESSAGES = "START_GETTING_MESSAGES";
+export const SUCCESS_GETTING_MESSAGES = "SUCCESS_GETTING_MESSAGES";
+export const FAIL_GETTING_MESSAGES = "FAIL_GETTING_MESSAGES"

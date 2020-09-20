@@ -1,21 +1,29 @@
-import React from "react";
-import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
-import CameraIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+
 import RoundPhoto from "../../common/RoundPhoto";
 import { COLOR, width } from "../../../constants";
 import MessageInput from "../../common/MessageInput";
-import IconWrapper from "../../common/IconWrapper";
+
 import { useSelector } from "react-redux";
+import { createNewFeed } from "../../../redux/feed/actions";
+import CameraButton from "../../common/Icons";
 
 const AddingPostField = () => {
+  const [text, setText] = useState("");
+
   const url = useSelector((state) => state.account.avatarUrl);
+
   return (
     <View style={styles.container}>
       <View>{url && <RoundPhoto url={url} size={42} />}</View>
-      <MessageInput placeholder="What’s new?" />
-      <IconWrapper activeOpacity={0.7} style={{ backgroundColor: "#7dcfff" }}>
-        <CameraIcon size={22} name="camera-plus" color="#fff" />
-      </IconWrapper>
+      <MessageInput
+        setValue={setText}
+        value={text}
+        placeholder="What’s new?"
+        thunk={createNewFeed}
+      />
+      <CameraButton />
     </View>
   );
 };
