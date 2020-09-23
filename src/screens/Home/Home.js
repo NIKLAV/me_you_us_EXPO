@@ -30,7 +30,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-  /* useEffect(() => {
+/*   useEffect(() => {
     if (page > lastPage) return;
     dispatch(getMyFeeds(page));
   }, [page]);
@@ -58,7 +58,7 @@ const Home = () => {
     <>
       <CustomStatusBar />
 
-   {/*    <FlatList
+     {/*  <FlatList
         scrollEventThrottle={16}
         data={data}
         keyExtractor={(item, index) => item.id.toString() + index}

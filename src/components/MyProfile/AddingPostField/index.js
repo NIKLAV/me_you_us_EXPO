@@ -5,12 +5,17 @@ import RoundPhoto from "../../common/RoundPhoto";
 import { COLOR, width } from "../../../constants";
 import MessageInput from "../../common/MessageInput";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createNewFeed } from "../../../redux/feed/actions";
 import CameraButton from "../../common/Icons";
 
 const AddingPostField = () => {
+  const dispatch = useDispatch();
   const [text, setText] = useState("");
+
+  const send = () => {
+    dispatch(createNewFeed({ message: text }));
+  };
 
   const url = useSelector((state) => state.account.avatarUrl);
 
@@ -21,7 +26,7 @@ const AddingPostField = () => {
         setValue={setText}
         value={text}
         placeholder="What’s new?"
-        thunk={createNewFeed}
+        send={send}
       />
       <CameraButton />
     </View>

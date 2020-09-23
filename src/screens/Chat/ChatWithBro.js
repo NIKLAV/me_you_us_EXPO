@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FlatList,
   KeyboardAvoidingView,
@@ -6,21 +6,21 @@ import {
   View,
   Platform,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import io from "socket.io-client";
 import ChatFooter from "../../components/Chat/ChatFooter";
 import PartnerMessage from "../../components/Chat/PartnerMessage";
 import YouMessage from "../../components/Chat/YouMessage";
-import {
-  CHAT_CONTAINER_WIDTH,
-  containerWidth,
-  height,
-  MARGIN,
-  width,
-} from "../../constants";
+import { height, MARGIN, width } from "../../constants";
 
 const ChatWithBro = () => {
+  const dispatch = useDispatch();
   const data = useSelector((state) => state.chats.messages);
+  const loading = useSelector(state => state.chats.loadingGettingMessages)
   const myId = useSelector((state) => state.account.id);
+  const chatId = useSelector((state) => state.chats.currentPartner.thread_id);
+  const socketConnected = useSelector((state) => state.socket.socketConnected);
+  console.warn("socketConnected", socketConnected);
 
   const checkMessage = (item) => {
     if (item.author.id === myId) {
@@ -45,6 +45,18 @@ const ChatWithBro = () => {
     return <View style={styles.separator}></View>;
   };
 
+  useEffect(() => {
+    if (socketConnected && chatId) {
+      dispatch({ type: "SUBSCRIBE", payload: [5, `threads.${chatId}`] });
+    }
+
+    return () => {
+      if (socketConnected && chatId) {
+        dispatch({ type: "UNSUBSCRIBE", payload: [6, `threads.${chatId}`] });
+      }
+    };
+  }, []);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS == "ios" ? "position" : "height"}
@@ -54,7 +66,9 @@ const ChatWithBro = () => {
       }}
     >
       <View style={styles.container}>
+        
         <FlatList
+          keyExtractor={(message) => message.id.toString()}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => checkMessage(item)}
           ListHeaderComponent={HeaderSeparator}
@@ -67,7 +81,9 @@ const ChatWithBro = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    height: height - 30 - MARGIN.DEFAULT_MARGIN_VERTICAL - 34
+  },
   separator: {
     height: MARGIN.DEFAULT_MARGIN_VERTICAL,
     width: width,

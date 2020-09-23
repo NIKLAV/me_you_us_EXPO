@@ -2,8 +2,6 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import {
   CHAT_CONTAINER_WIDTH,
-  COLOR,
-  containerWidth,
   SIZE_PHOTO,
   SPACE_BETWEEN_PHOTO_AND_MESSAGE,
 } from "../../constants";

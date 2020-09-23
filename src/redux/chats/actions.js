@@ -25,7 +25,7 @@ export const deleteMyChat = (id) => async (dispatch) => {
     if (status < 200 && status >= 300) throw new Error("Something went wrong");
     dispatch({ type: types.SUCCESS_DELETE_CHAT, payload: id });
   } catch (error) {
-    console.warn("error in getchats", error);
+    console.warn("error in deletechat", error);
     console.warn(error?.response?.data);
     let message = error?.response?.data;
     if (+error?.response?.status === 401) return;
@@ -33,10 +33,10 @@ export const deleteMyChat = (id) => async (dispatch) => {
   }
 };
 
-export const getCurrentPartnerData = (first_name, last_name) => (dispatch) => {
+export const getCurrentPartnerData = (first_name, last_name, thread_id, partner_id) => (dispatch) => {
   dispatch({
     type: types.ADD_DATA_IN_CHAT,
-    payload: { first_name, last_name },
+    payload: { first_name, last_name, thread_id, partner_id },
   });
 };
 
@@ -48,7 +48,7 @@ export const getMessages = (id) => async (dispatch) => {
     if (status < 200 && status >= 300) throw new Error("Something went wrong");
     dispatch({ type: types.SUCCESS_GETTING_MESSAGES, payload: data });
   } catch (error) {
-    console.warn("error in getchats", error);
+    console.warn("error in getmymessages", error);
     console.warn(error?.response?.data);
     let message = error?.response?.data;
     if (+error?.response?.status === 401) return;
@@ -56,3 +56,18 @@ export const getMessages = (id) => async (dispatch) => {
   }
 };
 
+export const sendMessageToUser = (body) => async (dispatch) => {
+  dispatch({ type: types.START_SEND_MESSAGE });
+  try {
+    const { data, status } = await API.chats.sendMessage(body);
+    console.warn("data in sendMessage", data);
+    if (status < 200 && status >= 300) throw new Error("Something went wrong");
+    dispatch({ type: types.SUCCESS_SEND_MESSAGE, payload: data });
+  } catch (error) {
+    console.warn("error in getmymessages", error);
+    console.warn(error?.response?.data);
+    let message = error?.response?.data;
+    if (+error?.response?.status === 401) return;
+    dispatch({ type: types.FAIL_SEND_MESSAGE });
+  }
+};

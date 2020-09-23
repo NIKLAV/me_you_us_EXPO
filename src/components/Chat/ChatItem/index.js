@@ -22,7 +22,7 @@ const ChatItem = ({ id, lastMessageInfo, partner }) => {
   const navigation = useNavigation();
 
   const openChat = () => {
-    dispatch(getCurrentPartnerData(first_name, last_name));
+    dispatch(getCurrentPartnerData(first_name, last_name, thread_id, partner.id));
     dispatch(getMessages(thread_id));
     navigation.navigate("ChatWithBro");
   };

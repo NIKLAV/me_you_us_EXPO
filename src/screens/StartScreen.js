@@ -21,20 +21,28 @@ const StartScreen = ({ navigation }) => {
         return;
       }
 
-      const expirationDate = new Date(JSON.parse(time));
+      /* const expirationDate = new Date(JSON.parse(time));
       if (expirationDate <= new Date() || !token) {
         
         delete axios.defaults.headers.common.Authorization;
         navigation.navigate("Auth");
         return;
-      }
+      } */
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       navigation.navigate("MainTopTabs");
       dispatch(authenticate(token));
-      
     };
+
     tryLogin();
   }, [dispatch]); 
+
+  useEffect(() => {
+    dispatch({ type: 'SOCKET_OPEN' });
+
+    return () => {
+      dispatch({ type: 'SOCKET_CLOSE' });
+    }
+  }, [dispatch]);
 
   return (
     <View

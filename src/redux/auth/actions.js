@@ -12,7 +12,7 @@ export const logout = () => async (dispatch) => {
     if (status < 200 && status >= 300) throw new Error("Something went wrong");
     await AsyncStorage.removeItem("MYUtoken");
     console.warn("logout");
-    await AsyncStorage.removeItem("expirationTime");
+   /*  await AsyncStorage.removeItem("expirationTime"); */
     dispatch({ type: types.AUTH_LOGOUT_SUCCESS });
     navigation.navigate("Auth");
     delete axios.defaults.headers.common.Authorization;
@@ -30,12 +30,12 @@ export const authLogin = (user, navigation) => async (dispatch) => {
     console.warn("login data", data);
     if (status < 200 && status >= 300) throw new Error("Something went wrong");
     dispatch(authenticate(data.token));
-    const expirationTime = new Date(new Date().getTime() + 3600000);
+    /* const expirationTime = new Date(new Date().getTime() + 3600000); */
     await AsyncStorage.setItem("MYUtoken", data.token);
-    await AsyncStorage.setItem(
+    /* await AsyncStorage.setItem(
       "expirationTime",
       JSON.stringify(expirationTime)
-    );
+    ); */
     /* dispatch({ type: types.AUTH_LOGIN_SUCCESS, payload: data }); */
     navigation.navigate("MainTopTabs");
   } catch (error) {

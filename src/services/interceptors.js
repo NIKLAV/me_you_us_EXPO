@@ -20,40 +20,28 @@ export const interceptorAxios = (dispatch) => {
 
   return axios.interceptors.response.use(
     async (response) => {
-      console.warn('int')
       if (response.config.url === "login") {
-        console.warn('int in if')
-        const token =   response?.data?.token;
-        console.warn("token in int", token);
+        const token = response?.data?.token;
+
         await AsyncStorage.setItem("MYUtoken", token);
         if (token) {
           axios.defaults.headers.common.Authorization = `Bearer ${token}`;
           /* history.replace(routes.newsfeed) */
         }
       }
-    if (response.config.url === "logout" && response.status === 204) {
+      if (response.config.url === "logout" && response.status === 204) {
         delete axios.defaults.headers.common.Authorization;
-      } 
+      }
 
       return response;
     },
     (error) => {
       if (error.response && error.response.status === 401) {
         delete axios.defaults.headers.common.Authorization;
-        dispatch(logout())
-      /* if (err.err) {
-          err.err = false;
-          dispatch(logout());
-          setTimeout(() => {
-            err.err = true;
-          }, 8000);
-        }   */
-
-        
-        /* navigation.navigate("Auth"); */
-        console.warn("err inter", error.response.status)
+        navigation.navigate('Auth')
+        console.warn("err inter", error.response.status);
       }
-      return Promise.reject(error);  
+      return Promise.reject(error);
     }
   );
 };

@@ -11,6 +11,7 @@ const initialState = {
 };
 
 const chatReducer = (state = initialState, { type, payload }) => {
+  console.log("data in reducer", state.data);
   switch (type) {
     case types.START_FETCH_MY_CHATS:
       return { ...state, loadingAllChats: true };
@@ -18,6 +19,10 @@ const chatReducer = (state = initialState, { type, payload }) => {
       return { ...state, loadingDeleteChat: true };
     case types.START_GETTING_MESSAGES:
       return { ...state, loadingGettingMessages: true };
+    case types.START_SEND_MESSAGE:
+      return { ...state };
+    case types.SUCCESS_SEND_MESSAGE:
+      return { ...state };
     case types.SUCCESS_FETCH_MY_CHATS:
       return {
         ...state,
@@ -27,13 +32,22 @@ const chatReducer = (state = initialState, { type, payload }) => {
     case types.SUCCESS_DELETE_CHAT:
       return {
         ...state,
-        data: state.data.filter(
-          (chat) =>
-            console.warn("reducer", chat.id, payload) || payload !== chat.id
-        ),
+        data: state.data.filter((chat) => payload !== chat.id),
       };
-      case types.SUCCESS_GETTING_MESSAGES:
-        return {...state, messages: payload, }
+    case types.SUCCESS_GETTING_MESSAGES:
+      return { ...state, messages: payload, loadingGettingMessages: false };
+    case types.SET_NEW_MESSAGE:
+      return {
+        ...state,
+        messages: [...state.messages, payload],
+        data: state.data.map((el) => {
+          if (el.id === state.currentPartner.thread_id) {
+            el.last_massage = payload;
+            return el;
+          }
+          return el;
+        }),
+      };
     case types.FAIL_FETCH_MY_CHATS:
     case types.FAIL_DELETE_CHAT:
       return initialState;

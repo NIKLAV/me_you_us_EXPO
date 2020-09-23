@@ -16,11 +16,12 @@ export const account = {
 export const feeds = {
   getMyFeeds: (page) => axios.get(`feeds?per_page=8&page=${page}`),
   addNewFeed: (body) => axios.post(`feeds`, body),
-  deleteFeed: (id) => axios.delete(`feeds/${id}`)
+  deleteFeed: (id) => axios.delete(`feeds/${id}`),
 };
 
 export const chats = {
   getChats: () => axios.get(`threads`),
   deleteChat: (id) => axios.delete(`threads/${id}`),
-  getMessagesFromChat: (id) => axios.get(`threads/${id}`)
-}
+  getMessagesFromChat: (id) => axios.get(`threads/${id}`),
+  sendMessage: (body) => axios.post(`messages`, body),
+};

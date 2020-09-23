@@ -4,14 +4,14 @@ import TelegaIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDispatch } from "react-redux";
 import { width, COLOR } from "../../../constants";
 
-const MessageInput = ({ placeholder, setValue, value, thunk, iconColor="#93969e" }) => {
+const MessageInput = ({ placeholder, setValue, value, send, iconColor="#93969e", body }) => {
   const dispatch = useDispatch();
 
   const onPress = () => {
     if (value.trim().length === 0) {
       return;
     }
-    dispatch(thunk({ message: value }));
+    send();
     setValue("");
   };
   return (

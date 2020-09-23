@@ -68,3 +68,19 @@ export const ADD_DATA_IN_CHAT = "ADD_DATA_IN_CHAT";
 export const START_GETTING_MESSAGES = "START_GETTING_MESSAGES";
 export const SUCCESS_GETTING_MESSAGES = "SUCCESS_GETTING_MESSAGES";
 export const FAIL_GETTING_MESSAGES = "FAIL_GETTING_MESSAGES"
+
+//---------------------------CHAT_SEND_MESSAGE-------------------------------//
+export const START_SEND_MESSAGE = "START_SEND_MESSAGE";
+export const SUCCESS_SEND_MESSAGE = "SUCCESS_SEND_MESSAGE";
+export const FAIL_SEND_MESSAGE = "FAIL_SEND_MESSAGE";
+
+//----------------------------SOCKET----------------------------//
+export const SOCKET_CONNECTED = 'SOCKET_CONNECTED';
+export const SOCKET_OPEN = 'SOCKET_OPEN';
+export const SOCKET_CLOSE = 'SOCKET_CLOSE';
+export const SET_SOCKET_TOKEN = 'SET_SOCKET_TOKEN';
+
+//----------------------------SOCKET_SEND_MESSAGE----------------------------//
+
+export const SET_NEW_MESSAGE = "SET_NEW_MESSAGE";
+
