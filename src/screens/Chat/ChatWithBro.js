@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   FlatList,
   KeyboardAvoidingView,
@@ -11,16 +11,19 @@ import io from "socket.io-client";
 import ChatFooter from "../../components/Chat/ChatFooter";
 import PartnerMessage from "../../components/Chat/PartnerMessage";
 import YouMessage from "../../components/Chat/YouMessage";
+import HeaderSeparator from "../../components/common/HeaderSeparator";
 import { height, MARGIN, width } from "../../constants";
 
 const ChatWithBro = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.chats.messages);
-  const loading = useSelector(state => state.chats.loadingGettingMessages)
+  const loading = useSelector((state) => state.chats.loadingGettingMessages);
   const myId = useSelector((state) => state.account.id);
   const chatId = useSelector((state) => state.chats.currentPartner.thread_id);
   const socketConnected = useSelector((state) => state.socket.socketConnected);
   console.warn("socketConnected", socketConnected);
+
+  const flatList = useRef(null);
 
   const checkMessage = (item) => {
     if (item.author.id === myId) {
@@ -39,10 +42,6 @@ const ChatWithBro = () => {
         url={item.author.avatar.url}
       />
     );
-  };
-
-  const HeaderSeparator = () => {
-    return <View style={styles.separator}></View>;
   };
 
   useEffect(() => {
@@ -66,13 +65,14 @@ const ChatWithBro = () => {
       }}
     >
       <View style={styles.container}>
-        
         <FlatList
+          ref={flatList}
           keyExtractor={(message) => message.id.toString()}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => checkMessage(item)}
           ListHeaderComponent={HeaderSeparator}
           data={data}
+          onContentSizeChange={() => flatList.current.scrollToEnd()}
         />
         <ChatFooter />
       </View>
@@ -82,12 +82,7 @@ const ChatWithBro = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: height - 30 - MARGIN.DEFAULT_MARGIN_VERTICAL - 34
-  },
-  separator: {
-    height: MARGIN.DEFAULT_MARGIN_VERTICAL,
-    width: width,
-    backgroundColor: "#efefef",
+    height: height - 30 - MARGIN.DEFAULT_MARGIN_VERTICAL - 34,
   },
 });
 

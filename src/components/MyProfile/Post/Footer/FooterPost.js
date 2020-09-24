@@ -7,10 +7,15 @@ import { COLOR, width } from "../../../../constants";
 import IconWrapper from "../../../common/IconWrapper";
 import TextWrapper from "../../../common/TextWrapper";
 import Counter from "./Counter";
+import { navigation } from "../../../../services/helpers";
 
 const sizeRound = 36;
 
-const FooterPost = () => {
+const FooterPost = ({commentsCount}) => {
+  const openComments = () => {
+    navigation.navigate("Comments");
+  };
+
   return (
     <View
       style={{ borderWidth: 1, borderColor: COLOR.POST_FOOTER_BORDER_COLOR }}
@@ -30,8 +35,8 @@ const FooterPost = () => {
         >
           <ShareIcon color={"#fff"} name="share" size={22} />
         </IconWrapper>
-        <TouchableOpacity activeOpacity={0.8}>
-          <TextWrapper>15 comments</TextWrapper>
+        <TouchableOpacity onPress={openComments} activeOpacity={0.8}>
+          <TextWrapper>{commentsCount} comments</TextWrapper>
         </TouchableOpacity>
       </View>
     </View>

@@ -4,19 +4,19 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { COLOR, FONT_SIZE } from "../../../constants";
 
-const CustomCheckBox = ({ label, containerStyle }) => {
-  const [checked, setChecked] = useState(false);
+const CustomCheckBox = ({ label, containerStyle, value, onValueChange }) => {
+/*   const [checked, setChecked] = useState(false);
   const onCheck = () => {
     setChecked(!checked);
-  };
+  }; */
   return (
     <TouchableOpacity
-      onPress={() => setChecked(!checked)}
+      onPress={() => onValueChange(!value)}
       style={{...styles.container, ...containerStyle}}
       activeOpacity={0.9}
     >
       <View style={styles.checkbox}>
-        {checked ? (
+        {value ? (
           <Icon
             name="ios-checkmark"
             color={COLOR.LOGIN_BUTTON_COLOR}

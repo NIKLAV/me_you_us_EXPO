@@ -9,11 +9,11 @@ import axios from "axios";
 const StartScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.warn("effect");
+    /* console.warn("effect"); */
     const tryLogin = async () => {
       const token = await AsyncStorage.getItem("MYUtoken");
       const time = await AsyncStorage.getItem("expirationTime");
-      console.warn('token i efect', token)
+      /* console.warn('token i efect', token) */
       if (!token) {
         
         delete axios.defaults.headers.common.Authorization;

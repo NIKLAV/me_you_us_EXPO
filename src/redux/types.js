@@ -43,6 +43,11 @@ export const START_CREATE_NEW_FEED = "START_CREATE_NEW_FEED";
 export const SUCCESS_CREATE_NEW_FEED = "SUCCESS_CREATE_NEW_FEED";
 export const FAIL_CREATE_NEW_FEED = "FAIL_CREATE_NEW_FEED";
 
+//-------------------DELETE_MY_FEED-------------------//
+export const START_DELETE_MY_FEED = "START_DELETE_MY_FEED";
+export const SUCCESS_DELETE_MY_FEED = "SUCCESS_DELETE_MY_FEED";
+export const FAIL_DELETE_MY_FEED = "FAIL_DELETE_MY_FEED";
+
 //-------------------MODAL-------------------//
 export const OPEN_MODAL_IN_FRIENDS = "OPEN_MODAL_IN_FRIENDS";
 export const CLOSE_MODAL_IN_FRIENDS = "CLOSE_MODAL_IN_FRIENDS";

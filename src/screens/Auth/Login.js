@@ -72,6 +72,7 @@ const Login = ({ navigation }) => {
   };
 
   const [isRemember, setIsRemember] = useState(false);
+  
 
   const onPressRemember = () => {
     setIsRemember(!isRemember);
@@ -145,7 +146,7 @@ const Login = ({ navigation }) => {
 
           <View style={styles.forgot__container}>
             {Platform.OS === "ios" ? (
-              <CustomCheckBox label="Remember me" />
+              <CustomCheckBox value={isRemember} onValueChange={setIsRemember}  label="Remember me" />
             ) : (
               <View style={styles.checkbox}>
                 <CheckBox

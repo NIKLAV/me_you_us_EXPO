@@ -1,5 +1,7 @@
 import React from "react";
+import { TouchableOpacity } from "react-native";
 import CameraIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import IconWrapper from "../IconWrapper";
 
 const CameraButton = () => {
@@ -11,3 +13,11 @@ const CameraButton = () => {
 };
 
 export default CameraButton;
+
+export const OpenModalButton = ({ onPress }) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Icon name="ellipsis-h" size={22} color={"#b1b3b7"} />
+    </TouchableOpacity>
+  );
+};

@@ -7,22 +7,33 @@ import DeleteIcon from "react-native-vector-icons/FontAwesome5";
 import CustomButton from "../../components/common/Button";
 import RoundPhoto from "../../components/common/RoundPhoto";
 import TextWrapper from "../../components/common/TextWrapper";
-import BottomSheet from "../../components/MyFriends/BottomSheet";
+/* import BottomSheet from "../../components/MyFriends/BottomSheet"; */
 import Friend from "../../components/MyFriends/Friend";
 import MyFriendsWrapper from "../../components/MyFriends/MyFriendsWrapper";
-
-import { COLOR, containerWidth, height, width } from "../../constants";
+import BottomSheet from "../../components/common/BottomSheet";
+import {
+  COLOR,
+  containerWidth,
+  height,
+  MODAL_HEIGHT_IN_MY_FRIENDS,
+  width,
+} from "../../constants";
 import { closeModalInFriends } from "../../redux/modal/actions";
 
 const AllFriends = () => {
   const dispatch = useDispatch();
   const isOpenInFriends = useSelector((state) => state.modal.isOpenInFriends);
-  
-  const modalRef = useRef();
+
+  /* const modalRef = useRef(); */
   return (
     <MyFriendsWrapper>
-      <Friend openSettings={() => modalRef.current.open()} />
-      <BottomSheet isOpen={isOpenInFriends} dispatchToClose={closeModalInFriends} ref={modalRef}>
+      <Friend /* openSettings={() => modalRef.current.open()} */ />
+      <BottomSheet
+        modalHeight={MODAL_HEIGHT_IN_MY_FRIENDS}
+        isOpen={isOpenInFriends}
+        dispatchToClose={closeModalInFriends}
+        modalStyle={{ height: MODAL_HEIGHT_IN_MY_FRIENDS }} /* ref={modalRef} */
+      >
         <View style={styles.containerPhotoAndText}>
           <RoundPhoto
             url={"https://i.ytimg.com/vi/vNRtqcpz5xY/maxresdefault.jpg"}
@@ -41,6 +52,7 @@ const AllFriends = () => {
             text="Write to Vasiliy "
             styleButton={styles.telegabuttonStyle}
             icon
+            onPress={() => closeModalInFriends()}
           >
             <TeletaIcon color="#fff" size={24} name="telegram" />
           </CustomButton>
@@ -76,12 +88,10 @@ const AllFriends = () => {
 
 const styles = StyleSheet.create({
   containerPhotoAndText: {
-    marginTop: 30,
+    marginTop: 30, 
     width: containerWidth,
     flexDirection: "row",
     alignItems: "center",
-    /*   borderBottomColor: COLOR.MYFRIENDS_SEPARATOR_COLOR,
-    borderBottomWidth: 1, */
     alignSelf: "center",
   },
   nameAndDateContainer: {
@@ -96,17 +106,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   telegabuttonStyle: {
-    paddingHorizontal: 10,
+    
     width: containerWidth,
-    flexDirection: "row",
-    justifyContent: "center",
+
     backgroundColor: COLOR.POST_FOOTER_TELEGA_AND_SHARE_COLOR,
   },
   defaultButtonStyle: {
-    paddingHorizontal: 10,
+   
     width: containerWidth,
-    flexDirection: "row",
-    justifyContent: "center",
+
     backgroundColor: "transparent",
     borderColor: "#e0e0e0",
     borderBottomWidth: 0.7,
@@ -119,7 +127,7 @@ const styles = StyleSheet.create({
     color: COLOR.MYFRIENDS_ICONS_AND_BUTTON_TEXT_COLOR,
   },
   buttonContainer: {
-    marginTop: height / 25,
+    marginTop: height / 25,  
     height: height / 4,
     justifyContent: "space-between",
   },

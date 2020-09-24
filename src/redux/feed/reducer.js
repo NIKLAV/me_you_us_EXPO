@@ -13,6 +13,8 @@ const feedReducer = (state = initialState, { type, payload }) => {
       return { ...state, loading: true };
     case types.START_CREATE_NEW_FEED:
       return { ...state, loadingNewfeed: true };
+      case types.START_DELETE_MY_FEED:
+        return {...state}
     case types.SUCCESS_FETCH_MY_FEED:
       return {
         ...state,
@@ -26,6 +28,8 @@ const feedReducer = (state = initialState, { type, payload }) => {
         loadingNewfeed: false,
         data: [payload.data, ...state.data],
       };
+      case types.SUCCESS_DELETE_MY_FEED:
+        return {...state, data: state.data.filter(el => el.id != payload)}
     case types.FAIL_FETCH_MY_FEED:
       return initialState;
     default:

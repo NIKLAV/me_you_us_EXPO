@@ -8,12 +8,14 @@ import StartScreen from "../screens/StartScreen";
 import { navigationRef } from "../services/helpers";
 import ChatWithBro from "../screens/Chat/ChatWithBro";
 import ChatHeader from "../components/Chat/ChatHeader";
+import CommentHeader from "../components/Comments/CommentHeader";
+import Comments from "../screens/Comments/Comments";
 
 const RootStack = createStackNavigator();
 
 const AllNavigation = () => {
-  const token = useSelector((state) => !!state.auth.token);
-  console.warn("token in state", token);
+ /*  const token = useSelector((state) => !!state.auth.token);
+  console.warn("token in state", token); */
   return (
     <NavigationContainer ref={navigationRef}>
       <RootStack.Navigator
@@ -29,6 +31,14 @@ const AllNavigation = () => {
           }}
           name="ChatWithBro"
           component={ChatWithBro}
+        />
+        <RootStack.Screen
+          options={{
+            headerShown: true,
+            header: () => <CommentHeader />
+          }}
+          name="Comments"
+          component={Comments}
         />
       </RootStack.Navigator>
     </NavigationContainer>

@@ -60,7 +60,7 @@ export const sendMessageToUser = (body) => async (dispatch) => {
   dispatch({ type: types.START_SEND_MESSAGE });
   try {
     const { data, status } = await API.chats.sendMessage(body);
-    console.warn("data in sendMessage", data);
+   /*  console.warn("data in sendMessage", data); */
     if (status < 200 && status >= 300) throw new Error("Something went wrong");
     dispatch({ type: types.SUCCESS_SEND_MESSAGE, payload: data });
   } catch (error) {

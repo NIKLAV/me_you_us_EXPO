@@ -22,7 +22,7 @@ const GeneralSettings = () => {
   const dispatch = useDispatch();
 
   const [currentImage, setCurrentImage] = useState(null);
-  console.warn(currentImage);
+
   const [base64Img, setbase64Img] = useState(null);
 
   const [showPicker, setShowPicker] = useState(false);
@@ -31,7 +31,7 @@ const GeneralSettings = () => {
   const [email, setEmail] = useState(null);
   const [emailError, setEmailError] = useState(null);
 
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState(null);
 
   const [firstName, setFirstName] = useState(null);
@@ -102,14 +102,18 @@ const GeneralSettings = () => {
       return true;
     }
     if (name === fieldsNames.phone) {
-      console.log(value);
-      if (value === "") return;
+      
+      if (value === null || value === '') {
+        setPhoneNumberError('');
+        return false;
+      } else if (value.length > 0 && phoneValid(value)) {
+        setPhoneNumberError('');
+        return false;
+      }
       setPhoneNumberError("The phone format is invalid.");
       return true;
-    } else if (value.length > 0 && phoneValid(value)) {
-      setPhoneNumberError("");
-      return false;
     }
+
     return false;
   };
 
@@ -128,10 +132,10 @@ const GeneralSettings = () => {
     dispatch(
       uploadUserPhoto({
         encoded_image_data: base64Img,
-        image_type: "profile_image",
+        "type": "profile",
       })
     );
-    if (phoneNumber.length === 0) {
+    if (phoneNumber === null) {
       dispatch(
         updateUserData({
           first_name: firstName,

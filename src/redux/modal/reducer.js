@@ -1,7 +1,7 @@
 import * as types from "../types";
 
 const initialState = {
-  profileData: null,
+  profileData: {},
   isOpenInFriends: false,
   isOpenInProfile: false,
 };

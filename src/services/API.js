@@ -10,7 +10,7 @@ export const auth = {
 export const account = {
   getAccount: () => axios.get("account"),
   updateAccount: (body) => axios.put("account", body),
-  uploadPhoto: (body) => axios.post("account/photo", body),
+  uploadPhoto: (body) => axios.post("upload/image", body),
 };
 
 export const feeds = {

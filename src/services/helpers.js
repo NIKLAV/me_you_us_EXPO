@@ -23,7 +23,7 @@ export const emailValid = (email) => {
 
 export const phoneValid = (phone) => {
   const regExp = /^[\+][1-9]{1}[\d]{9,13}$/;
-
+  if (phone === null) return true
   if (!regExp.test(phone)) return false;
 
   return true;
@@ -55,13 +55,6 @@ export const shake = (Animated, shakeAnim) => {
   });
 };
 
-export const toBase64 = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
 
 export const navigationRef = React.createRef(null);
 // export const navigation = navigationRef.current
