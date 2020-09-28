@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import {
   StyleSheet,
   View,
@@ -25,9 +25,10 @@ import Answer from "./Answer";
 
 const data = [1, 2];
 
-const Comment = ({ commentId, author, date, answers, message }) => {
+const Comment = ({ commentId, author, date, answers, message, onPressAnswer }) => {
   const dispatch = useDispatch();
   const { avatar, first_name, last_name, nickname, id } = author;
+  
 
   const [isShowAnswers, setIsShowAnswers] = useState(false);
 
@@ -53,7 +54,9 @@ const Comment = ({ commentId, author, date, answers, message }) => {
       <View style={styles.afterCommentContainer}>
         <TextWrapper style={styles.createtAt}>{date}</TextWrapper>
         {/*  <TextWrapper style={styles.like}>22 like</TextWrapper> */}
-        <TextWrapper style={styles.answer}>answer</TextWrapper>
+        <TouchableOpacity onPress={() => onPressAnswer(commentId)} activeOpacity={0.8}>
+          <TextWrapper style={styles.answer}>answer</TextWrapper>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.repliesContainer}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList, KeyboardAvoidingView, StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Comment from "../../components/Comments/Comment";
@@ -8,11 +8,26 @@ import Preloader from "../../components/common/Preloader";
 import { containerWidth, height, MARGIN } from "../../constants";
 import { getCommentsInFeed } from "../../redux/feedsComments/actions";
 import BottomSheet from "../../components/common/BottomSheet";
+import { CHECK_ID_AND_IS_ANSWER } from "../../redux/types";
 
 /* const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; */
 
 const Comments = () => {
   const dispatch = useDispatch();
+  /* const [answerState, setIsAnswerState] = useState({
+    isAnswer: false,
+    commentId: null
+  }) */
+  const inputRef = useRef(null);
+  
+  const onPressAnswer = (commentId) => {
+    dispatch({
+      type: CHECK_ID_AND_IS_ANSWER,
+      payload: { commentId: commentId },
+    });
+    /*  setIsAnswerState({...answerState, isAnswer: true, commentId: commentId}) */
+    inputRef.current.focus();
+  };
 
   const postId = useSelector((state) => state.feedComments.postId);
   const loading = useSelector(
@@ -25,7 +40,6 @@ const Comments = () => {
   }, []);
 
   const comments = useSelector((state) => state.feedComments.comments);
-  
 
   return (
     <KeyboardAvoidingView
@@ -44,6 +58,7 @@ const Comments = () => {
               ListHeaderComponent={HeaderSeparator}
               renderItem={({ item }) => (
                 <Comment
+                  onPressAnswer={onPressAnswer}
                   commentId={item.id}
                   author={item.author}
                   date={item.publish_at}
@@ -52,7 +67,7 @@ const Comments = () => {
                 />
               )}
             />
-            <CommentFooter />
+            <CommentFooter inputRef={inputRef} />
           </>
         ) : (
           <Preloader />

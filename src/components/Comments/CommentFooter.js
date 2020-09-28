@@ -7,17 +7,28 @@ import {
   containerWidth,
   width,
 } from "../../constants";
-import { sendCommentInFeed } from "../../redux/feedsComments/actions";
+import {
+  sendAnswersInComment,
+  sendCommentInFeed,
+} from "../../redux/feedsComments/actions";
 import MessageInput from "../common/MessageInput";
 import RoundPhoto from "../common/RoundPhoto";
 
-const CommentFooter = () => {
+const CommentFooter = ({ inputRef }) => {
   const postId = useSelector((state) => state.feedComments.postId);
   const dispatch = useDispatch();
+  const { isAnswer, currentCommentId } = useSelector(
+    (state) => state.feedComments
+  );
+  console.warn("isAnswer", isAnswer, "id", currentCommentId);
   const [text, setText] = useState("");
+
   const sendComment = () => {
-    dispatch(sendCommentInFeed({ feed_id: postId, message: text }));
+    if (isAnswer === false) {
+      dispatch(sendCommentInFeed({ feed_id: postId, message: text }));
+    } else dispatch(sendAnswersInComment(currentCommentId, { message: text }));
   };
+
   return (
     <View style={styles.container}>
       <RoundPhoto
@@ -30,6 +41,7 @@ const CommentFooter = () => {
         value={text}
         setValue={setText}
         send={sendComment}
+        inputRef={inputRef}
       />
     </View>
   );
