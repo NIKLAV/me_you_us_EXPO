@@ -8,11 +8,16 @@ import IconWrapper from "../../../common/IconWrapper";
 import TextWrapper from "../../../common/TextWrapper";
 import Counter from "./Counter";
 import { navigation } from "../../../../services/helpers";
+import { useDispatch } from "react-redux";
+import { ADD_DATA_IN_COMMENT_SCREEN } from "../../../../redux/types";
 
 const sizeRound = 36;
 
-const FooterPost = ({commentsCount}) => {
+const FooterPost = ({ commentsCount, postId }) => {
+  const dispatch = useDispatch();
+
   const openComments = () => {
+    dispatch({ type: ADD_DATA_IN_COMMENT_SCREEN, payload: postId });
     navigation.navigate("Comments");
   };
 

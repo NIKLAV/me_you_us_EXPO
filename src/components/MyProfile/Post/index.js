@@ -11,7 +11,7 @@ const Post = ({ data }) => {
     <View style={styles.container}>
       <HeaderPost author={data.author} publish_at={publish_at} id={id} />
       <BodyPost message={message} />
-      <FooterPost commentsCount={comments_count} />
+      <FooterPost postId={id} commentsCount={comments_count} />
     </View>
   );
 };

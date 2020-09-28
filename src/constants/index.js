@@ -10,6 +10,8 @@ export const SIZE_PHOTO = 50;
 export const SPACE_BETWEEN_PHOTO_AND_MESSAGE = 15;
 export const MODAL_HEIGHT_IN_MY_FRIENDS = height / 1.5;
 export const MODAL_HEIGHT_IN_MY_PROFILE = height / 3;
+export const SIZE_AVA_IN_COMMENTS = 50;
+export const SIZE_AVA_IN_ASNWER = SIZE_AVA_IN_COMMENTS / 1.5;
 
 export const COLOR = {
   LOGO_TEXT_COLOR: "#fff",
@@ -41,4 +43,11 @@ export const FONT_SIZE = {
 
 export const MARGIN = {
   DEFAULT_MARGIN_VERTICAL: 10,
+  DEFAULT_MARGIN_BETWEEN_AVA_AND_TEXT: 15,
+};
+
+export const DEFAULT_TEXT_STYLES_IN_COMMENTS = {
+  color: "#525B6A",
+  fontWeight: "normal",
+  fontSize: 15,
 };

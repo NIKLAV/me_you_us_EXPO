@@ -64,8 +64,14 @@ const GeneralSettings = () => {
   }, [data]);
 
   const onPick = (uri, base64) => {
+    dispatch(
+      uploadUserPhoto({
+        encoded_image_data: base64,
+        "type": "profile",
+      })
+    );
     setCurrentImage(uri);
-    setbase64Img(base64);
+    /* setbase64Img(base64); */
   };
 
   const fieldsNames = {
@@ -129,12 +135,12 @@ const GeneralSettings = () => {
     );
 
     if (newE.length) return;
-    dispatch(
+   /*  dispatch(
       uploadUserPhoto({
         encoded_image_data: base64Img,
         "type": "profile",
       })
-    );
+    ); */
     if (phoneNumber === null) {
       dispatch(
         updateUserData({
@@ -153,7 +159,7 @@ const GeneralSettings = () => {
           birth_date: date,
           phone: phoneNumber,
         })
-      );
+      ); 
   };
 
   const clearErrorFirstName = () => {

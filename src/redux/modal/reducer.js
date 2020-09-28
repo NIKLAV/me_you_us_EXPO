@@ -4,6 +4,7 @@ const initialState = {
   profileData: {},
   isOpenInFriends: false,
   isOpenInProfile: false,
+  /* commentData: {}, */
 };
 
 const modalReducer = (state = initialState, { type, payload }) => {

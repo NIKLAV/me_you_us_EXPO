@@ -25,3 +25,9 @@ export const chats = {
   getMessagesFromChat: (id) => axios.get(`threads/${id}`),
   sendMessage: (body) => axios.post(`messages`, body),
 };
+
+export const feedsComments = {
+  getComments: (id) => axios.get(`comments/${id}?per_page=15&page=1`),
+  sendComment: (body) => axios.post(`comments`, body),
+  getAnswers: (id) => axios.get(`comments/answers/${id}`)
+}

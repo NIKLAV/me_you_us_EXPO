@@ -72,7 +72,7 @@ export const ADD_DATA_IN_CHAT = "ADD_DATA_IN_CHAT";
 //---------------------------CHAT_USER_DATA-------------------------------//
 export const START_GETTING_MESSAGES = "START_GETTING_MESSAGES";
 export const SUCCESS_GETTING_MESSAGES = "SUCCESS_GETTING_MESSAGES";
-export const FAIL_GETTING_MESSAGES = "FAIL_GETTING_MESSAGES"
+export const FAIL_GETTING_MESSAGES = "FAIL_GETTING_MESSAGES";
 
 //---------------------------CHAT_SEND_MESSAGE-------------------------------//
 export const START_SEND_MESSAGE = "START_SEND_MESSAGE";
@@ -80,12 +80,30 @@ export const SUCCESS_SEND_MESSAGE = "SUCCESS_SEND_MESSAGE";
 export const FAIL_SEND_MESSAGE = "FAIL_SEND_MESSAGE";
 
 //----------------------------SOCKET----------------------------//
-export const SOCKET_CONNECTED = 'SOCKET_CONNECTED';
-export const SOCKET_OPEN = 'SOCKET_OPEN';
-export const SOCKET_CLOSE = 'SOCKET_CLOSE';
-export const SET_SOCKET_TOKEN = 'SET_SOCKET_TOKEN';
+export const SOCKET_CONNECTED = "SOCKET_CONNECTED";
+export const SOCKET_OPEN = "SOCKET_OPEN";
+export const SOCKET_CLOSE = "SOCKET_CLOSE";
+export const SET_SOCKET_TOKEN = "SET_SOCKET_TOKEN";
 
 //----------------------------SOCKET_SEND_MESSAGE----------------------------//
 
 export const SET_NEW_MESSAGE = "SET_NEW_MESSAGE";
 
+//----------------------------GET_COMMENTS_IN_FEED----------------------------//
+export const START_GETTING_COMMENTS_IN_FEED = "START_GETTING_COMMENTS_IN_FEED";
+export const SUCCESS_GETTING_COMMENTS_IN_FEED =
+  "SUCCESS_GETTING_COMMENTS_IN_FEED";
+export const FAIL_GETTING_COMMENTS_IN_FEED = "FAIL_GETTING_COMMENTS_IN_FEED";
+
+//----------------------------GET_COMMENTS_IN_FEED----------------------------//
+export const START_SEND_COMMENT_IN_FEED = "START_SEND_COMMENT_IN_FEED";
+export const SUCCESS_SEND_COMMENT_IN_FEED = "SUCCESS_SEND_COMMENT_IN_FEED";
+export const FAIL_SEND_COMMENT_IN_FEED = "FAIL_SEND_COMMENT_IN_FEED";
+
+//----------------------------GET_ANSWERS_IN_COMMENT----------------------------//
+export const START_GET_ANSWERS_IN_COMMENT = "START_GET_ANSWERS_IN_COMMENT";
+export const SUCCESS_GET_ANSWERS_IN_COMMENT = "SUCCESS_GET_ANSWERS_IN_COMMENT";
+export const FAIL_GET_ANSWERS_IN_COMMENT = "FAIL_GET_ANSWERS_IN_COMMENT";
+//----------------------------ADD_DATA_IN_COMMENTS----------------------------//
+
+export const ADD_DATA_IN_COMMENT_SCREEN = "ADD_DATA_IN_COMMENT_SCREEN";

@@ -12,6 +12,7 @@ import ChatFooter from "../../components/Chat/ChatFooter";
 import PartnerMessage from "../../components/Chat/PartnerMessage";
 import YouMessage from "../../components/Chat/YouMessage";
 import HeaderSeparator from "../../components/common/HeaderSeparator";
+import Preloader from "../../components/common/Preloader";
 import { height, MARGIN, width } from "../../constants";
 
 const ChatWithBro = () => {
@@ -65,16 +66,23 @@ const ChatWithBro = () => {
       }}
     >
       <View style={styles.container}>
-        <FlatList
-          ref={flatList}
-          keyExtractor={(message) => message.id.toString()}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => checkMessage(item)}
-          ListHeaderComponent={HeaderSeparator}
-          data={data}
-          onContentSizeChange={() => flatList.current.scrollToEnd()}
-        />
-        <ChatFooter />
+        {!loading ? (
+          <>
+            <FlatList
+              inverted
+              ref={flatList}
+              keyExtractor={(message) => message.id.toString()}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item }) => checkMessage(item)}
+              ListFooterComponent={HeaderSeparator}
+              data={data}
+              /* onContentSizeChange={() => flatList.current.scrollToEnd({animated: true})} */
+            />
+            <ChatFooter />
+          </>
+        ) : (
+          <Preloader />
+        )}
       </View>
     </KeyboardAvoidingView>
   );

@@ -34,11 +34,15 @@ const chatReducer = (state = initialState, { type, payload }) => {
         data: state.data.filter((chat) => payload !== chat.id),
       };
     case types.SUCCESS_GETTING_MESSAGES:
-      return { ...state, messages: payload, loadingGettingMessages: false };
+      return {
+        ...state,
+        messages: payload.reverse(),
+        loadingGettingMessages: false,
+      };
     case types.SET_NEW_MESSAGE:
       return {
         ...state,
-        messages: [...state.messages, payload],
+        messages: [payload, ...state.messages],
         data: state.data.reduce((array, current) => {
           if (current.id === state.currentPartner.thread_id) {
             current.last_massage = payload;
