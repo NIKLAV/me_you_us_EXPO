@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -23,18 +23,65 @@ import RoundPhoto from "../common/RoundPhoto";
 import TextWrapper from "../common/TextWrapper";
 import Answer from "./Answer";
 
-const data = [1, 2];
-
-const Comment = ({ commentId, author, date, answers, message, onPressAnswer }) => {
+const Comment = ({
+  commentId,
+  author,
+  date,
+  answers,
+  message,
+  onPressAnswer,
+/*  currentAnswers,
+  addCurrentAnswer, */ 
+}) => {
   const dispatch = useDispatch();
   const { avatar, first_name, last_name, nickname, id } = author;
-  
+
+ const [currentAnswers, setCurrentAnswers] = useState([]);
+
+  const addCurrentAnswer = (data) => {
+    setCurrentAnswers([...currentAnswers, ...data.data]);
+  };
 
   const [isShowAnswers, setIsShowAnswers] = useState(false);
 
+  const loadingAnswers = useSelector(
+    (state) => state.feedComments.loadingAnswers
+  );
+  const { lastPageOfAnswers, totalAnswers } = useSelector(
+    (state) => state.feedComments
+  );
+
+  const [pageOfAnswers, setPageOfAnswers] = useState(1);
+  console.warn(pageOfAnswers);
+
+
+
   const showAnswers = () => {
     setIsShowAnswers(!isShowAnswers);
-    dispatch(getAnswersInComment(commentId));
+    dispatch(getAnswersInComment(commentId, pageOfAnswers, addCurrentAnswer));
+    setPageOfAnswers(pageOfAnswers + 1);
+  };
+
+  const hideAnswers = () => {
+    setIsShowAnswers(false);
+  };
+
+  const loadMore = () => {
+    dispatch(getAnswersInComment(commentId, pageOfAnswers, addCurrentAnswer));
+    setPageOfAnswers(pageOfAnswers + 1);
+  };
+
+
+  const footerAnswer = () => {
+    return (
+      <>
+        {lastPageOfAnswers >= pageOfAnswers && (
+          <TouchableOpacity onPress={loadMore}>
+            <Text>See {totalAnswers - 3 * (pageOfAnswers - 1)} replies</Text>
+          </TouchableOpacity>
+        )}
+      </>
+    );
   };
 
   const allAnswers = useSelector((state) => state.feedComments.answers);
@@ -54,13 +101,16 @@ const Comment = ({ commentId, author, date, answers, message, onPressAnswer }) =
       <View style={styles.afterCommentContainer}>
         <TextWrapper style={styles.createtAt}>{date}</TextWrapper>
         {/*  <TextWrapper style={styles.like}>22 like</TextWrapper> */}
-        <TouchableOpacity onPress={() => onPressAnswer(commentId)} activeOpacity={0.8}>
+        <TouchableOpacity
+          onPress={() => onPressAnswer(commentId)}
+          activeOpacity={0.8}
+        >
           <TextWrapper style={styles.answer}>answer</TextWrapper>
         </TouchableOpacity>
       </View>
 
       <View style={styles.repliesContainer}>
-        {answers > 0 && (
+        {answers > 0 && !isShowAnswers && (
           <TouchableOpacity activeOpacity={0.8} onPress={showAnswers}>
             <TextWrapper style={styles.replies}>
               See {answers} replies
@@ -68,8 +118,15 @@ const Comment = ({ commentId, author, date, answers, message, onPressAnswer }) =
           </TouchableOpacity>
         )}
         {isShowAnswers && (
-          <FlatList
-            data={allAnswers}
+          <TouchableOpacity activeOpacity={0.8} onPress={hideAnswers}>
+            <TextWrapper style={styles.replies}>Hide answers</TextWrapper>
+          </TouchableOpacity>
+        )}
+        {isShowAnswers && (
+          /* !loadingAnswers && */ <FlatList
+            ListFooterComponent={footerAnswer}
+            data={currentAnswers}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <Answer
                 date={item.publish_at}

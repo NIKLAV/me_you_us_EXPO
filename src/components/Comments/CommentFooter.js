@@ -14,7 +14,7 @@ import {
 import MessageInput from "../common/MessageInput";
 import RoundPhoto from "../common/RoundPhoto";
 
-const CommentFooter = ({ inputRef }) => {
+const CommentFooter = ({ inputRef, url, addCurrentAnswer }) => {
   const postId = useSelector((state) => state.feedComments.postId);
   const dispatch = useDispatch();
   const { isAnswer, currentCommentId } = useSelector(
@@ -26,14 +26,14 @@ const CommentFooter = ({ inputRef }) => {
   const sendComment = () => {
     if (isAnswer === false) {
       dispatch(sendCommentInFeed({ feed_id: postId, message: text }));
-    } else dispatch(sendAnswersInComment(currentCommentId, { message: text }));
+    } else dispatch(sendAnswersInComment(currentCommentId, { message: text }, addCurrentAnswer));
   };
 
   return (
     <View style={styles.container}>
       <RoundPhoto
         size={50}
-        url={`https://www.perunica.ru/uploads/posts/2019-03/1552932077_1.jpg`}
+        url={url}
       />
       <MessageInput
         width={{ width: width - 80 }}

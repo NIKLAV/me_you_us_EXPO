@@ -10,22 +10,17 @@ import { getCommentsInFeed } from "../../redux/feedsComments/actions";
 import BottomSheet from "../../components/common/BottomSheet";
 import { CHECK_ID_AND_IS_ANSWER } from "../../redux/types";
 
-/* const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; */
-
 const Comments = () => {
   const dispatch = useDispatch();
-  /* const [answerState, setIsAnswerState] = useState({
-    isAnswer: false,
-    commentId: null
-  }) */
+
   const inputRef = useRef(null);
-  
+
   const onPressAnswer = (commentId) => {
     dispatch({
       type: CHECK_ID_AND_IS_ANSWER,
       payload: { commentId: commentId },
     });
-    /*  setIsAnswerState({...answerState, isAnswer: true, commentId: commentId}) */
+
     inputRef.current.focus();
   };
 
@@ -33,6 +28,7 @@ const Comments = () => {
   const loading = useSelector(
     (state) => state.feedComments.loadingCommentsInFeed
   );
+  const avaUrl = useSelector((state) => state.account.avatarUrl);
 
   useEffect(() => {
     if (!postId) return;
@@ -40,6 +36,15 @@ const Comments = () => {
   }, []);
 
   const comments = useSelector((state) => state.feedComments.comments);
+
+  /* const [currentAnswers, setCurrentAnswers] = useState([]);
+
+  const addCurrentAnswer = (data) => {
+    if (Array.isArray(data)) {
+      setCurrentAnswers([...currentAnswers, ...data]);
+    } else setCurrentAnswers([...currentAnswers, data]);
+  };
+  console.warn("render"); */
 
   return (
     <KeyboardAvoidingView
@@ -64,10 +69,17 @@ const Comments = () => {
                   date={item.publish_at}
                   answers={item.answers}
                   message={item.message}
+                  /* currentAnswers={currentAnswers}
+                  setCurrentAnswers={setCurrentAnswers}
+                  addCurrentAnswer={addCurrentAnswer} */
                 />
               )}
             />
-            <CommentFooter inputRef={inputRef} />
+            <CommentFooter
+             /*  addCurrentAnswer={addCurrentAnswer} */
+              url={avaUrl}
+              inputRef={inputRef}
+            />
           </>
         ) : (
           <Preloader />

@@ -92,6 +92,7 @@ const Home = () => {
         onEndReached={loadMore}
         ListHeaderComponent={HomeHeader}
         ListFooterComponent={footerList}
+        showsVerticalScrollIndicator={false}
       />
 
       <BottomSheet

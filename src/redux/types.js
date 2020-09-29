@@ -113,5 +113,9 @@ export const FAIL_SEND_ANSWER_IN_COMMENT = "FAIL_SEND_ANSWER_IN_COMMENT";
 
 export const ADD_DATA_IN_COMMENT_SCREEN = "ADD_DATA_IN_COMMENT_SCREEN";
 
-//----------------------------ADD_DATA_FOR_CHECK_IS_THIS_ANSWER----------------------------//
+//-----------------------ADD_DATA_FOR_CHECK_IS_THIS_ANSWER--------------------//
 export const CHECK_ID_AND_IS_ANSWER = "CHECK_ID_AND_IS_ANSWER"
+
+//-----------------------CHANGE_COMMENT_COUNT_AFTER_SEND_COMMENT--------------------//
+export const CHANGE_COMMENT_COUNT_AFTER_SEND_COMMENT = "CHANGE_COMMENT_COUNT_AFTER_SEND_COMMENT"
+
