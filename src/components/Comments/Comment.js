@@ -19,6 +19,7 @@ import {
 } from "../../constants";
 import { getAnswersInComment } from "../../redux/feedsComments/actions";
 import { OpenModalButton } from "../common/Icons";
+import Preloader from "../common/Preloader";
 import RoundPhoto from "../common/RoundPhoto";
 import TextWrapper from "../common/TextWrapper";
 import Answer from "./Answer";
@@ -30,13 +31,13 @@ const Comment = ({
   answers,
   message,
   onPressAnswer,
-/*  currentAnswers,
-  addCurrentAnswer, */ 
+  /*  currentAnswers,
+  addCurrentAnswer, */
 }) => {
   const dispatch = useDispatch();
   const { avatar, first_name, last_name, nickname, id } = author;
 
- const [currentAnswers, setCurrentAnswers] = useState([]);
+  const [currentAnswers, setCurrentAnswers] = useState([]);
 
   const addCurrentAnswer = (data) => {
     setCurrentAnswers([...currentAnswers, ...data.data]);
@@ -54,8 +55,6 @@ const Comment = ({
   const [pageOfAnswers, setPageOfAnswers] = useState(1);
   console.warn(pageOfAnswers);
 
-
-
   const showAnswers = () => {
     setIsShowAnswers(!isShowAnswers);
     dispatch(getAnswersInComment(commentId, pageOfAnswers, addCurrentAnswer));
@@ -71,21 +70,22 @@ const Comment = ({
     setPageOfAnswers(pageOfAnswers + 1);
   };
 
-
   const footerAnswer = () => {
     return (
       <>
+        {loadingAnswers && <Preloader />}
         {lastPageOfAnswers >= pageOfAnswers && (
-          <TouchableOpacity onPress={loadMore}>
-            <Text>See {totalAnswers - 3 * (pageOfAnswers - 1)} replies</Text>
+          <TouchableOpacity style={{marginTop: 15}} onPress={loadMore}>
+            <TextWrapper style={styles.replies}>
+              See {totalAnswers - 3 * (pageOfAnswers - 1)} replies
+            </TextWrapper>
           </TouchableOpacity>
         )}
       </>
     );
   };
 
-  const allAnswers = useSelector((state) => state.feedComments.answers);
-  console.log("allAnswers", allAnswers);
+  /* const allAnswers = useSelector((state) => state.feedComments.answers); */
 
   return (
     <>

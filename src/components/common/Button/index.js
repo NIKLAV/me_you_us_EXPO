@@ -26,6 +26,7 @@ const CustomButton = ({
           disabled={disabled}
           onPress={onPress}
           style={{ ...styles.default, ...styleButton }}
+          activeOpacity={0.8}
         >
           <View style={{ position: "absolute", left: 15 }}>{children}</View>
           <Text style={{ ...styles.defaultText, ...styleText }}>{text}</Text>
@@ -35,6 +36,7 @@ const CustomButton = ({
           disabled={disabled}
           onPress={onPress}
           style={{ ...styles.default, ...styleButton }}
+          activeOpacity={0.8}
         >
           <Text style={{ ...styles.defaultText, ...styleText }}>{text}</Text>
         </TouchableOpacity>

@@ -13,11 +13,23 @@ import Advertisement from "../screens/Settings/Advertisiment";
 import Security from "../screens/Settings/Security";
 import ChatWithBro from "../screens/Chat/ChatWithBro";
 import { MARGIN } from "../constants";
+import Profile from "../screens/Profile/Profile";
 
 const Tab = createMaterialTopTabNavigator();
 const SetingsStack = createStackNavigator();
 const FriendsStack = createStackNavigator();
-const ChatStack = createStackNavigator();
+const HomeStack = createStackNavigator();
+
+const HomeAndProfile = () => {
+  return (
+    <HomeStack.Navigator
+      screenOptions={{ headerShown: false, animationEnabled: false }}
+    >
+      <HomeStack.Screen name="Home" component={Home} />
+      <HomeStack.Screen name="Profile" component={Profile} />
+    </HomeStack.Navigator>
+  );
+};
 
 const Settings = () => {
   return (
@@ -42,23 +54,6 @@ const MyFriends = () => {
   );
 };
 
-/* export const ChatScreens = () => {
-  return (
-    <ChatStack.Navigator>
-      <ChatStack.Screen
-        options={{ headerShown: false }}
-        name="Chat"
-        component={Chat}
-      />
-      <ChatStack.Screen
-        options={{ headerStyle: { marginTop: MARGIN.DEFAULT_MARGIN_VERTICAL } }}
-        name="ChatWithBro"
-        component={ChatWithBro}
-      />
-    </ChatStack.Navigator>
-  );
-}; */
-
 const MainTopTabs = () => {
   return (
     <Tab.Navigator
@@ -67,7 +62,7 @@ const MainTopTabs = () => {
       lazy
       /* removeClippedSubviews */
     >
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="HomeAndProfile" component={HomeAndProfile} />
       <Tab.Screen name="Wallet" component={Wallet} />
       <Tab.Screen name="MyFriends" component={MyFriends} />
       <Tab.Screen name="Notification" component={Notification} />

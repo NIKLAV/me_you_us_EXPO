@@ -1,27 +1,43 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { navigation } from "../../../services/helpers";
 import RoundPhoto from "../../common/RoundPhoto";
 import TextWrapper from "../../common/TextWrapper";
 
-const NameAndPhoto = ({ url, name, lastName, size, style, nameContainerStyle }) => {
+const NameAndPhoto = ({
+  url,
+  name,
+  lastName,
+  size,
+  style,
+  nameContainerStyle,
+}) => {
+  
+  const goToProfile = () => {
+    navigation.navigate('Profile')
+  }
   return (
-    <View style={{...styles.container, ...style}}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      style={{ ...styles.container, ...style }}
+      onPress={goToProfile}
+    >
       <RoundPhoto size={size} url={url} />
       <View style={nameContainerStyle}>
         <TextWrapper>
           {name} {lastName}
         </TextWrapper>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     /* width: "100%", */
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row'
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
   },
 });
 

@@ -31,4 +31,8 @@ export const feedsComments = {
   sendComment: (body) => axios.post(`comments`, body),
   getAnswers: (id, page) => axios.get(`comments/answers/${id}?per_page=3&page=${page}`),
   sendAnswer: (id, body) => axios.post(`comments/${id}`, body)
+};
+
+export const profile = {
+  getProfile: (id) => axios.get(`profile/${id}`)
 }

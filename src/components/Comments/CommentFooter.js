@@ -20,7 +20,7 @@ const CommentFooter = ({ inputRef, url, addCurrentAnswer }) => {
   const { isAnswer, currentCommentId } = useSelector(
     (state) => state.feedComments
   );
-  console.warn("isAnswer", isAnswer, "id", currentCommentId);
+  
   const [text, setText] = useState("");
 
   const sendComment = () => {

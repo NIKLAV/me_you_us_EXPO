@@ -26,7 +26,7 @@ const TopIcon = ({ isFocused, name }) => {
   };
   return (
     <>
-      {name === "Home" ? (
+      {name === "HomeAndProfile" ? (
         <TouchableWithoutFeedback onPress={onPress} style={styles.icon}>
           <HomeIcon name="home" color={color} size={25} />
         </TouchableWithoutFeedback>

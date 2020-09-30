@@ -15,7 +15,7 @@ const initialState = {
 };
 
 const feedCommentReducer = (state = initialState, { type, payload }) => {
-  console.log("payload", payload);
+  
   switch (type) {
     case types.START_GETTING_COMMENTS_IN_FEED:
       return { ...state, loadingCommentsInFeed: true };
